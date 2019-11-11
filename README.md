@@ -1,1 +1,1 @@
-# Gestao-de-Inventirios
+# Gestao-de-Inventarios
