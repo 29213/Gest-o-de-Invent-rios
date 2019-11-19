@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="pt.iade.gestaoInventario.controllers.RelatorioInventarioController">
+   <children>
+      <AnchorPane layoutX="100.0" layoutY="125.0" prefHeight="350.0" prefWidth="600.0">
+         <children>
+            <TableView prefHeight="350.4" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn fx:id="tableColumnCodigo" prefWidth="66.39996337890625" text="Código" />
+                <TableColumn fx:id="tableColumnProduto" prefWidth="232.79998779296875" text="Produto" />
+                  <TableColumn fx:id="tableColumnQuantidade" minWidth="0.0" prefWidth="126.39996337890625" text="Quantidade" />
+                  <TableColumn fx:id="tableColumnCategoria" prefWidth="173.5999755859375" text="Categoria" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <Label layoutX="313.0" layoutY="49.0" text="Inventário">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
