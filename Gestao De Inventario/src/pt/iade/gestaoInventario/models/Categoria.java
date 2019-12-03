@@ -2,11 +2,11 @@ package pt.iade.gestaoInventario.models;
 
 public class Categoria {
 	private int idCategoria;
-	private String descrição;
+	private String descricao;
 
-	public Categoria(int idCategoria, String descrição) {
+	public Categoria(int idCategoria, String descricao) {
 		this.idCategoria = idCategoria;
-		this.descrição = descrição;
+		this.descricao = descricao;
 	}
 
 	public Categoria() {
@@ -21,17 +21,17 @@ public class Categoria {
 		this.idCategoria = idCategoria;
 	}
 
-	public String getDescrição() {
-		return descrição;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescrição(String descrição) {
-		this.descrição = descrição;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
 	public String toString() {
-		return this.descrição;
+		return this.descricao;
 	}
 
 }
