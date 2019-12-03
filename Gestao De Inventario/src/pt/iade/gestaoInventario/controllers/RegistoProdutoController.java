@@ -5,49 +5,57 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import pt.iade.gestaoInventario.models.Categoria;
 import pt.iade.gestaoInventario.models.Produto;
 
-public class ControllerRegistoProduto {
+public class RegistoProdutoController {
 
-    @FXML
-    private TableColumn<Produto, String> tableColumnNome;
+	@FXML
+	private AnchorPane anchorPane;
 
-    @FXML
-    private TableColumn<Produto, Double> tableColumnPreco;
+	@FXML
+	private TableView<Produto> tableViewProduto;
 
-    @FXML
-    private TableColumn<Produto, Integer> tableColumnQuantidade;
+	@FXML
+	private TableColumn<Produto, String> tableColumnNome;
 
-    @FXML
-    private TableColumn<Categoria, String> tableColumnCategoria;
+	@FXML
+	private TableColumn<Produto, Double> tableColumnPreco;
 
-    @FXML
-    private TextField TextFieldNome;
+	@FXML
+	private TableColumn<Produto, Integer> tableColumnQuantidade;
 
-    @FXML
-    private TextField TextFieldPreco;
+	@FXML
+	private TableColumn<Categoria, String> tableColumnCategoria;
 
-    @FXML
-    private TextField TextFieldQuantidade;
+	@FXML
+	private TextField TextFieldNome;
 
-    @FXML
-    private ComboBox<Categoria> comboBoxCategoria;
+	@FXML
+	private TextField TextFieldPreco;
 
-    @FXML
-    private Button buttonAdicionar;
+	@FXML
+	private TextField TextFieldQuantidade;
 
-    @FXML
-    private Button buttonRemover;
+	@FXML
+	private ComboBox<Categoria> comboBoxCategoria;
 
-    @FXML
-    void AdicionarProduto(ActionEvent event) {
+	@FXML
+	private Button buttonAdicionar;
 
-    }
+	@FXML
+	private Button buttonAlterar;
 
-    @FXML
-    void RemoverProduto(ActionEvent event) {
+	@FXML
+	void AdicionarProduto(ActionEvent event) {
 
-    }
+	}
+
+	@FXML
+	void AlterarProduto(ActionEvent event) {
+
+	}
 }

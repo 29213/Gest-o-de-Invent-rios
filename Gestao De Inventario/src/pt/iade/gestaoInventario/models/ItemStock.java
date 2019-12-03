@@ -1,22 +1,22 @@
 package pt.iade.gestaoInventario.models;
 
-public class ItemDeEstoque {
+public class ItemStock {
 
-	private int idItemDeEstoque;
+	private int idItemDeStock;
 	private int quantidade;
-	private Estoque estoque;
+	private Stock stock;
 	private Produto produto;
 
-	public ItemDeEstoque() {
+	public ItemStock() {
 
 	}
 
 	public int getIdItemDeEstoque() {
-		return idItemDeEstoque;
+		return idItemDeStock;
 	}
 
-	public void setIdItemDeEstoque(int idItemDeEstoque) {
-		this.idItemDeEstoque = idItemDeEstoque;
+	public void setIdItemDeEstoque(int idItemDeStock) {
+		this.idItemDeStock = idItemDeStock;
 	}
 
 	public int getQuantidade() {
@@ -27,12 +27,12 @@ public class ItemDeEstoque {
 		this.quantidade = quantidade;
 	}
 
-	public Estoque getEstoque() {
-		return estoque;
+	public Stock getEstoque() {
+		return stock;
 	}
 
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
+	public void setEstoque(Stock stock) {
+		this.stock = stock;
 	}
 
 	public Produto getProduto() {

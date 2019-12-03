@@ -3,13 +3,13 @@ package pt.iade.gestaoInventario.models;
 public class Colaborador {
 	private int idColaboarador;
 	private String nome;
-	private int nColaborador;
+	private int numero;
 	private String telefone;
 
-	public Colaborador(int idColaboarador, String nome, int nColaborador) {
+	public Colaborador(int idColaboarador, String nome, int numero) {
 		this.idColaboarador = idColaboarador;
 		this.nome = nome;
-		this.nColaborador = nColaborador;
+		this.numero = numero;
 	}
 
 	public Colaborador() {
@@ -32,11 +32,11 @@ public class Colaborador {
 	}
 
 	public int getnColaborador() {
-		return nColaborador;
+		return numero;
 	}
 
 	public void setnColaborador(int nColaborador) {
-		this.nColaborador = nColaborador;
+		this.numero = nColaborador;
 	}
 
 	public String getTelefone() {

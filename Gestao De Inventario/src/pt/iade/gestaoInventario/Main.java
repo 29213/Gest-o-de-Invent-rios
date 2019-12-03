@@ -1,23 +1,26 @@
-package application;
+package pt.iade.gestaoInventario;
 	
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
 	@Override
-	public void start(Stage primaryStage) {
-		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	public void start(Stage primaryStage) throws Exception {
+		
+			Parent root = FXMLLoader.load(getClass().getResource("/pt/iade/gestaoInventario/views/TelaPrincipal.fxml"));
+			Scene scene = new Scene(root);
+			
 			primaryStage.setScene(scene);
+			primaryStage.setTitle("Sistema de Gestão de Inventários");
+			primaryStage.setResizable(false);
+			primaryStage.centerOnScreen();
 			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+		
+		
 	}
 	
 	public static void main(String[] args) {

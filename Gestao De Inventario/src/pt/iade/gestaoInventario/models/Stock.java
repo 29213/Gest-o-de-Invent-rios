@@ -3,29 +3,29 @@ package pt.iade.gestaoInventario.models;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Estoque {
-	private int idEstoque;
+public class Stock {
+	private int idStock;
 	private LocalDate data;
 	private double valor;
-	private List<ItemDeEstoque> itensDeEstoque;
+	private List<ItemStock> itensDeStock;
 	private Colaborador colaborador;
 
-	public Estoque() {
+	public Stock() {
 
 	}
 
-	public Estoque(int idEstoque, LocalDate data, double valor) {
-		this.idEstoque = idEstoque;
+	public Stock(int idStock, LocalDate data, double valor) {
+		this.idStock = idStock;
 		this.data = data;
 		this.valor = valor;
 	}
 
-	public int getIdEstoque() {
-		return idEstoque;
+	public int getIdStock() {
+		return idStock;
 	}
 
-	public void setIdEstoque(int idEstoque) {
-		this.idEstoque = idEstoque;
+	public void setidStock(int idStock) {
+		this.idStock = idStock;
 	}
 
 	public LocalDate getData() {
@@ -44,12 +44,12 @@ public class Estoque {
 		this.valor = valor;
 	}
 
-	public List<ItemDeEstoque> getItensDeEstoque() {
-		return itensDeEstoque;
+	public List<ItemStock> getItensDeStock() {
+		return itensDeStock;
 	}
 
-	public void setItensDeInventario(List<ItemDeEstoque> itensDeEstoque) {
-		this.itensDeEstoque = itensDeEstoque;
+	public void setItensDeInventario(List<ItemStock> itensDeStock) {
+		this.itensDeStock = itensDeStock;
 	}
 
 	public Colaborador getColaborador() {
