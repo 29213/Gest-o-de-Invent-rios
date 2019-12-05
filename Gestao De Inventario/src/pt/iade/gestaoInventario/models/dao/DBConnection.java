@@ -6,6 +6,13 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * 
+ * Está classe faz a conexão com a base de dados
+ * 
+ *
+ */
+
 public class DBConnection {
 	private static Connection connection = null;
 	private static final String SERVIDOR = "localhost";

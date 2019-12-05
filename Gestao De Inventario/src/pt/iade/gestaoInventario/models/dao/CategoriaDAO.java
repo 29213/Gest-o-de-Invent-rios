@@ -11,6 +11,11 @@ import java.util.logging.Logger;
 
 import pt.iade.gestaoInventario.models.Categoria;
 
+/**
+ * 
+ * Esta classe perminte ter interação com a base de dados.
+ *
+ */
 public class CategoriaDAO {
 	public boolean inserir(Categoria categoria) {
 		String sql = "INSERT INTO categorias(descricao) VALUES(?)";
