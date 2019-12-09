@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="pt.iade.gestaoInventario.controllers.ProcessoStockPedidoController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iade.gestaoInventario.controllers.ProcessoStockPedidoController">
    <children>
       <GridPane layoutX="100.0" layoutY="92.0" prefHeight="416.0" prefWidth="600.0">
         <columnConstraints>
@@ -48,7 +47,7 @@
                <children>
                   <ComboBox fx:id="comboBoxPedidoProduto" prefHeight="34.0" prefWidth="268.0" promptText="Selecionar produto...." />
                   <TextField fx:id="textFildPedidoItemStock" prefHeight="34.0" prefWidth="150.0" />
-                  <Button fx:id="buttanAdicionar" mnemonicParsing="false" onAction="#AdiconarQuantidadePedido" prefHeight="33.0" prefWidth="108.0" text="Adicionar" />
+                  <Button fx:id="buttanAdicionar" mnemonicParsing="false" onAction="#buttonAdiconarQuantidade" prefHeight="33.0" prefWidth="108.0" text="Adicionar" />
                </children>
                <GridPane.margin>
                   <Insets top="6.0" />
@@ -64,7 +63,7 @@
             <TextField fx:id="textFildTotalPedido" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Button fx:id="buttonConfirmar" layoutX="451.0" layoutY="534.0" mnemonicParsing="false" onAction="#ConfirmarPedido" prefHeight="26.0" prefWidth="108.0" text="Confirmar" />
-      <Button fx:id="CancelarPedido" layoutX="592.0" layoutY="534.0" mnemonicParsing="false" onAction="#CancelarPedido" prefHeight="26.0" prefWidth="108.0" text="Cancelar" />
+      <Button fx:id="buttonConfirmar" layoutX="451.0" layoutY="534.0" mnemonicParsing="false" onAction="#buttonConfirmarPedido" prefHeight="26.0" prefWidth="108.0" text="Confirmar" />
+      <Button fx:id="CancelarPedido" layoutX="592.0" layoutY="534.0" mnemonicParsing="false" onAction="#buttonCancelarPedido" prefHeight="26.0" prefWidth="108.0" text="Cancelar" />
    </children>
 </AnchorPane>

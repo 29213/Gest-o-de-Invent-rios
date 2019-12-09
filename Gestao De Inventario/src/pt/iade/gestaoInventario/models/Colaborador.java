@@ -1,13 +1,13 @@
 package pt.iade.gestaoInventario.models;
 
 public class Colaborador {
-	private int idColaboarador;
+	private int idColaborador;
 	private String nome;
 	private int numero;
 	private String telefone;
 
-	public Colaborador(int idColaboarador, String nome, int numero) {
-		this.idColaboarador = idColaboarador;
+	public Colaborador(int idColaborador, String nome, int numero) {
+		this.idColaborador = idColaborador;
 		this.nome = nome;
 		this.numero = numero;
 	}
@@ -15,12 +15,12 @@ public class Colaborador {
 	public Colaborador() {
 	}
 
-	public int getIdColaboarador() {
-		return idColaboarador;
+	public int getIdColaborador() {
+		return idColaborador;
 	}
 
-	public void setIdColaboarador(int idColaboarador) {
-		this.idColaboarador = idColaboarador;
+	public void setIdColaborador(int idColaborador) {
+		this.idColaborador = idColaborador;
 	}
 
 	public String getNome() {
@@ -31,20 +31,20 @@ public class Colaborador {
 		this.nome = nome;
 	}
 
-	public int getnColaborador() {
+	public int getNumero() {
 		return numero;
 	}
 
-	public void setnColaborador(int nColaborador) {
-		this.numero = nColaborador;
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
 	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setTelefone(String string) {
+		this.telefone = string;
 	}
 
 	@Override

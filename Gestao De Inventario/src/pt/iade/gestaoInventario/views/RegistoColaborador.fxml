@@ -14,10 +14,10 @@
    <children>
     <AnchorPane layoutX="39.0" layoutY="100.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="328.0">
          <children>
-            <TableView layoutX="26.0" layoutY="-3.0" prefHeight="376.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableViewColaboradores" layoutX="26.0" layoutY="-3.0" prefHeight="376.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn fx:id="tableColumnNome" prefWidth="164.79998779296875" text="Nome" />
-                <TableColumn fx:id="tableColumnNumero" prefWidth="163.20001220703125" text="Numero" />
+                <TableColumn fx:id="tableColumnColaboradorNome" prefWidth="164.79998779296875" text="Nome" />
+                <TableColumn fx:id="tableColumnColaboradorNumero" prefWidth="163.20001220703125" text="Numero" />
               </columns>
             </TableView>
          </children>

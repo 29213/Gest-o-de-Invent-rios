@@ -24,7 +24,7 @@ public class ColaboradorDAO {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, colaborador.getNome());
 			stmt.setInt(2, colaborador.getNumero());
-			stmt.setInt(3, colaborador.getTelefone());
+			stmt.setString(3, colaborador.getTelefone());
 			stmt.execute();
 			return true;
 		} catch (SQLException ex) {
@@ -40,7 +40,7 @@ public class ColaboradorDAO {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, colaborador.getNome());
 			stmt.setInt(2, colaborador.getNumero());
-			stmt.setInt(3, colaborador.getTelefone());
+			stmt.setString(3, colaborador.getTelefone());
 			stmt.setInt(4, colaborador.getIdColaborador());
 			stmt.execute();
 			return true;
@@ -77,7 +77,7 @@ public class ColaboradorDAO {
 				colaborador.setIdColaborador(resultado.getInt("idColaborador"));
 				colaborador.setNome(resultado.getString("nome"));
 				colaborador.setNumero(resultado.getInt("numero"));
-				colaborador.setTelefone(resultado.getInt("telefone"));
+				colaborador.setTelefone(resultado.getString("telefone"));
 				retorno.add(colaborador);
 			}
 		} catch (SQLException ex) {
@@ -97,7 +97,7 @@ public class ColaboradorDAO {
 			if (resultado.next()) {
 				colaborador.setNome(resultado.getString("nome"));
 				colaborador.setNumero(resultado.getInt("numero"));
-				colaborador.setTelefone(resultado.getInt("telefone"));
+				colaborador.setTelefone(resultado.getString("telefone"));
 				retorno = colaborador;
 			}
 		} catch (SQLException ex) {

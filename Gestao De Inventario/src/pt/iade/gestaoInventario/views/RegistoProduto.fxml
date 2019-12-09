@@ -17,12 +17,12 @@
    <children>
     <AnchorPane layoutX="34.0" layoutY="101.0" prefHeight="400.0" prefWidth="382.0">
          <children>
-            <TableView fx:id="tableViewProduto" prefHeight="400.0" prefWidth="382.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableViewProdutos" prefHeight="400.0" prefWidth="382.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn fx:id="tableColumnNome" prefWidth="117.59997099637985" text="Nome" />
-                <TableColumn fx:id="tableColumnPreco" prefWidth="68.00000762939453" text="Preço" />
-                  <TableColumn fx:id="tableColumnQuantidade" prefWidth="94.4000244140625" text="Quantidade" />
-                  <TableColumn fx:id="tableColumnCategoria" prefWidth="100.79998779296875" text="Categoria" />
+                <TableColumn fx:id="tableColumnProdutoNome" prefWidth="117.59997099637985" text="Nome" />
+                <TableColumn fx:id="tableColumnProdutoPreco" prefWidth="68.00000762939453" text="Preço" />
+                  <TableColumn fx:id="tableColumnProdutoQuantidade" prefWidth="94.4000244140625" text="Quantidade" />
+                  <TableColumn fx:id="tableColumnProdutoCategoria" prefWidth="100.79998779296875" text="Categoria" />
               </columns>
             </TableView>
          </children>
@@ -45,9 +45,9 @@
                   <Label text="Preço:" GridPane.rowIndex="1" />
                   <Label text="Quantitade:" GridPane.rowIndex="2" />
                   <Label text="Categoria:" GridPane.rowIndex="3" />
-                  <TextField fx:id="TextFieldNome" GridPane.columnIndex="1" />
-                  <TextField fx:id="TextFieldPreco" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="TextFieldQuantidade" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="TextFieldProdutoNome" GridPane.columnIndex="1" />
+                  <TextField fx:id="TextFieldProdutoPreco" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="TextFieldProdutoQuantidade" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <ComboBox fx:id="comboBoxCategoria" editable="true" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="224.0" promptText="Selecionar categoria..." GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <cursor>
                         <Cursor fx:constant="DEFAULT" />

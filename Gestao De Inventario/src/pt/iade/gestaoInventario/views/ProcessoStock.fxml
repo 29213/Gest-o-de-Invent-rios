@@ -49,8 +49,8 @@
                         <Label fx:id="labelValor" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <Button fx:id="buttonPedido" layoutX="81.0" layoutY="343.0" mnemonicParsing="false" onAction="#PedidoStock" prefHeight="26.0" prefWidth="94.0" text="Pedido" />
-                  <Button fx:id="buttonRemover" layoutX="186.0" layoutY="343.0" mnemonicParsing="false" onAction="#RevomerPedido" prefHeight="26.0" prefWidth="94.0" text="Remover" />
+                  <Button fx:id="buttonPedido" layoutX="81.0" layoutY="343.0" mnemonicParsing="false" onAction="#buttonPedidoStock" prefHeight="26.0" prefWidth="94.0" text="Pedido" />
+                  <Button fx:id="buttonRemover" layoutX="186.0" layoutY="343.0" mnemonicParsing="false" onAction="#buttonRevomerPedido" prefHeight="26.0" prefWidth="94.0" text="Remover" />
                   <Label layoutX="72.0" layoutY="14.0" text="Detalhes do Pedido">
                      <font>
                         <Font name="System Bold" size="24.0" />

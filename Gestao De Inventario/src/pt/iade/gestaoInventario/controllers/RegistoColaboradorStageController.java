@@ -78,7 +78,7 @@ public class RegistoColaboradorStageController implements Initializable {
 		if (validarEntradaDeDados()) {
 			colaborador.setNome(String.valueOf(textFieldColaboradorNome.getText()));
 			colaborador.setNumero(Integer.valueOf(textFieldColaboradorNumero.getText()));
-			colaborador.setTelefone(Integer.valueOf(textFieldColaboradorTelefone.getText()));
+			colaborador.setTelefone(String.valueOf(textFieldColaboradorTelefone.getText()));
 
 			buttonConfirmarClick = true;
 			colaboradorStage.close();

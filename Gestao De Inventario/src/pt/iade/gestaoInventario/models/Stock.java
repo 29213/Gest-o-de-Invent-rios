@@ -7,7 +7,7 @@ public class Stock {
 	private int idStock;
 	private LocalDate data;
 	private double valor;
-	private List<ItemStock> itensDeStock;
+	private List<ItemDeStock> itensDeStock;
 	private Colaborador colaborador;
 
 	public Stock() {
@@ -24,7 +24,7 @@ public class Stock {
 		return idStock;
 	}
 
-	public void setidStock(int idStock) {
+	public void setIdStock(int idStock) {
 		this.idStock = idStock;
 	}
 
@@ -44,11 +44,11 @@ public class Stock {
 		this.valor = valor;
 	}
 
-	public List<ItemStock> getItensDeStock() {
+	public List<ItemDeStock> getItensDeStock() {
 		return itensDeStock;
 	}
 
-	public void setItensDeInventario(List<ItemStock> itensDeStock) {
+	public void setItensDeStock(List<ItemDeStock> itensDeStock) {
 		this.itensDeStock = itensDeStock;
 	}
 

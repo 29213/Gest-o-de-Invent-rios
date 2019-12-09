@@ -65,7 +65,6 @@ public class TelaPrincipalController implements Initializable {
     void handleMenuItemRegistoProdutos(ActionEvent event) throws IOException {
     	AnchorPane d;
     	d = FXMLLoader.load(Main.class.getResource("./views/RegistoProduto.fxml"));
-		System.out.println(d);
     	anchorPane.getChildren().setAll(d);
     }
 

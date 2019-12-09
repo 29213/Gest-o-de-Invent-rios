@@ -5,7 +5,7 @@ public class Produto {
 	private String nome;
 	private double preco;
 	private int quantidade;
-	private Categoria categiria;
+	private Categoria categoria;
 
 	public Produto() {
 
@@ -50,12 +50,12 @@ public class Produto {
 		this.quantidade = quantidade;
 	}
 
-	public Categoria getCategiria() {
-		return categiria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setCategiria(Categoria categiria) {
-		this.categiria = categiria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	@Override
