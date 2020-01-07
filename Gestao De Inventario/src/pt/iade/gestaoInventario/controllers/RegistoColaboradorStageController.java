@@ -37,7 +37,7 @@ public class RegistoColaboradorStageController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
@@ -65,7 +65,7 @@ public class RegistoColaboradorStageController implements Initializable {
 		this.colaborador = colaborador;
 		this.textFieldColaboradorNome.setText(colaborador.getNome());
 		this.textFieldColaboradorNumero.setText(String.valueOf(colaborador.getNumero()));
-		this.textFieldColaboradorTelefone.setText(String.valueOf(colaborador.getTelefone()));
+		this.textFieldColaboradorTelefone.setText(colaborador.getTelefone());
 	}
 
 	@FXML
@@ -76,9 +76,9 @@ public class RegistoColaboradorStageController implements Initializable {
 	@FXML
 	void buttonConfirmar(ActionEvent event) {
 		if (validarEntradaDeDados()) {
-			colaborador.setNome(String.valueOf(textFieldColaboradorNome.getText()));
+			colaborador.setNome(textFieldColaboradorNome.getText());
 			colaborador.setNumero(Integer.valueOf(textFieldColaboradorNumero.getText()));
-			colaborador.setTelefone(String.valueOf(textFieldColaboradorTelefone.getText()));
+			colaborador.setTelefone(textFieldColaboradorTelefone.getText());
 
 			buttonConfirmarClick = true;
 			colaboradorStage.close();

@@ -5,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +22,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pt.iade.gestaoInventario.models.Colaborador;
 import pt.iade.gestaoInventario.models.dao.ColaboradorDAO;
-
+/**
+ * 
+ * Controlador da interface principal de registo de Colaborador.
+ * Permite visualizar os colaboradores registados, numa ListView.
+ * Permite escolher um colaborador e:
+ *    <li> Visualizar as informações do pedido ao lado;
+ *	  <li> Alterar os dados do colaborador abrindo uma nova janela, chama o controlador {@link RegistoColaboradorStageController};
+ *	  <li> Apagar; 
+ *Permite adicionar um coladorador abrindo uma nova janela, chama o contralador {@link RegistoColaboradorStageController}.
+ *
+ */
 public class RegistoColaboradorController implements Initializable {
 
 	@FXML
@@ -66,18 +75,18 @@ public class RegistoColaboradorController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		carregarTableViewColaborador();
 
-		/** Limpando a exibição dos detalhes do colaborador */
+		/**  Exibir  os detalhes do colaborador que for selecionado na tabela*/
 		selecionarItemTableViewColaboradores(null);
 
 		/**
-		 * Lista é ativada diante de qualquer alterações na seleção de itens da tabela
+		 * A lista é ativada diante de qualquer alterações na seleção dos itens da tabela
 		 */
 		tableViewColaboradores.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> selecionarItemTableViewColaboradores(newValue));
-
+		
 	}
 
-	/** Carregar tabela colaborador */
+	/** Carregar tabela de colaborador */
 	@FXML
 	public void carregarTableViewColaborador() {
 
@@ -90,7 +99,7 @@ public class RegistoColaboradorController implements Initializable {
 		tableViewColaboradores.setItems(observableListColaboradores);
 	}
 
-	/** Selecionar item tabela colaborador */
+	/** Selecionar item tabela colaborador e apresentar os detatlhes do colaborador selecionado */
 	public void selecionarItemTableViewColaboradores(Colaborador colaborador) {
 		if (colaborador != null) {
 			labelCodigo.setText(String.valueOf(colaborador.getIdColaborador()));
@@ -105,7 +114,7 @@ public class RegistoColaboradorController implements Initializable {
 		}
 
 	}
-
+	/** Adicionar um colaborador a base de dados e carregar na tabela */
 	@FXML
 	void AdicionarColaborador(ActionEvent event) throws IOException {
 		Colaborador colaborador = new Colaborador();
@@ -115,12 +124,11 @@ public class RegistoColaboradorController implements Initializable {
 			carregarTableViewColaborador();
 		}
 	}
-
+	/** Alterar dados do colaborador selecionado na tabela*/
 	@FXML
 	void AlterarColaborador(ActionEvent event) throws IOException {
 		tableViewColaboradores.getItems();
-		Colaborador colaborador = tableViewColaboradores.getSelectionModel()
-				.getSelectedItem();/** Obtendo Colaboradores selecionado */
+		Colaborador colaborador = tableViewColaboradores.getSelectionModel().getSelectedItem();/** Obtendo Colaboradores selecionado */
 		if (colaborador != null) {
 			boolean buttonConfirmar = showRegistoColaboradorStage(colaborador);
 			if (buttonConfirmar) {
@@ -129,11 +137,11 @@ public class RegistoColaboradorController implements Initializable {
 			}
 		} else {
 			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setContentText("Por favor, escolha um colaborador na Tabela!");
+			alert.setContentText("Por favor, selecionar um colaborador na Tabela!");
 			alert.show();
 		}
 	}
-
+	/** Remover colaborador selecionado da tabela e da base de dados */
 	@FXML
 	void RemoverColaborador(ActionEvent event) throws IOException {
 		tableViewColaboradores.getItems();
@@ -152,7 +160,7 @@ public class RegistoColaboradorController implements Initializable {
 			alert.show();
 		}
 	}
-
+	/** Metodo para carregar a janela de registo e alteraçao do colaborador*/
 	public boolean showRegistoColaboradorStage(Colaborador colaborador) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(RegistoColaboradorStageController.class
@@ -161,7 +169,8 @@ public class RegistoColaboradorController implements Initializable {
 
 		/** Criando um tela de registo (colaboradorStage) */
 		Stage colaboradorStage = new Stage();
-		colaboradorStage.setTitle("Registar Colaborador");
+		colaboradorStage.setTitle("Colaborador");
+		colaboradorStage.setResizable(false);
 		Scene scene = new Scene(janela);
 		colaboradorStage.setScene(scene);
 

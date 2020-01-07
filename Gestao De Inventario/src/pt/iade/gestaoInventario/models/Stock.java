@@ -2,7 +2,12 @@ package pt.iade.gestaoInventario.models;
 
 import java.time.LocalDate;
 import java.util.List;
-
+/**
+ * 
+ * Classe de dados ou de dominio.
+ * 
+ *
+ */
 public class Stock {
 	private int idStock;
 	private LocalDate data;
@@ -14,11 +19,16 @@ public class Stock {
 
 	}
 
-	public Stock(int idStock, LocalDate data, double valor) {
+	public Stock(int idStock, LocalDate data, double valor, Colaborador colaborador) {
+		super();
 		this.idStock = idStock;
 		this.data = data;
 		this.valor = valor;
+		this.colaborador = colaborador;
 	}
+
+
+
 
 	public int getIdStock() {
 		return idStock;

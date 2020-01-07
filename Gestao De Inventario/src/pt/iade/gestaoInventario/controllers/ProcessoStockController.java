@@ -3,12 +3,11 @@ package pt.iade.gestaoInventario.controllers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,30 +31,41 @@ import pt.iade.gestaoInventario.models.dao.ItemDeStockDAO;
 import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 import pt.iade.gestaoInventario.models.dao.StockDAO;
 
+/**
+ * Controlador da interface principal do processo de pedido. Permite visualizar
+ * os pedidos feitos numa ListView Permite escolher um pedido e:
+ * <li>Apagar
+ * <li>Visualizar as informações do pedido ao lado
+ * <li>Visualizar os itens dos pedidos abrindo uma nova janela, chama o
+ * controlador {@link ItensDePedidoController} Permite adicionar um pedido
+ * abrindo uma nova janela, chama o contralador
+ * {@link ProcessoStockPedidoController}
+ * 
+ */
 public class ProcessoStockController implements Initializable {
 
 	@FXML
 	private TableView<Stock> tableViewPedidos;
 	@FXML
-	private TableColumn<Stock, Integer> tableColumnCodigo;
+	private TableColumn<Stock, Integer> tableColumnStockCodigo;
 
 	@FXML
-	private TableColumn<Stock, Date> tableColumnData;
+	private TableColumn<Stock, LocalDate> tableColumnStockData;
 
 	@FXML
-	private TableColumn<Colaborador, String> tableColumnColaborador;
+	private TableColumn<Colaborador, String> tableColumnStockColaborador;
 
 	@FXML
-	private Label labelCodigo;
+	private Label labelCodigoStock;
 
 	@FXML
 	private Label labelDataStock;
 
 	@FXML
-	private Label labelColaborador;
+	private Label labelColaboradorStock;
 
 	@FXML
-	private Label labelValor;
+	private Label labelValorStock;
 
 	@FXML
 	private Button buttonPedido;
@@ -67,27 +77,50 @@ public class ProcessoStockController implements Initializable {
 
 	private ObservableList<Stock> observableListStocks;
 
+	/** Atributos para manipulação da base de dados */
 	private final ProdutoDAO produtoDAO = new ProdutoDAO();
 	private final ItemDeStockDAO itemDeStockDAO = new ItemDeStockDAO();
 	private final StockDAO stockDAO = new StockDAO();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		carregarTableViewPedidos();
 
 		/**
-		 * Lista activa diante de quaisquer alterações na seleção de itens da Tabela.
+		 * A Lista ativa diante de quaisquer alterações na seleção de itens da Tabela.
 		 */
 		tableViewPedidos.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> selecionarItemTableViewPedidos(newValue));
-
 	}
+
+	// ableViewPedidos.getSelectionModel().selectedItemProperty().addListener(observableListStocks,
+	// oldVal, newVal);{
+	// if (newVal!= null) {
+	// new Stage();
+	// }
+	// try {
+	// FXMLLoader loader = new FXMLLoader();
+	// loader.setLocation(ProcessoStockPedidoController.class.getResource("/pt/iade/gestaoInventario/views/ItensDePedido.fxml"));
+	// AnchorPane janela = (AnchorPane) loader.load();
+
+	// /** Mostrar tela de itens do pedido */
+	// Stage Stage = new Stage();
+	// Stage.setTitle("Itens do Pedido");
+	// Stage.setResizable(false);
+	// Scene scene = new Scene(janela);
+	// Stage.setScene(scene);
+	// Stage.show();
+	// }
+	// catch (Exception e) {
+	// Logger.getLogger(StockDAO.class.getName()).log(Level.SEVERE,null, e);
+	// }
 
 	public void carregarTableViewPedidos() {
 
-		tableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("idStock"));
-		tableColumnData.setCellValueFactory(new PropertyValueFactory<>("data"));
-		tableColumnColaborador.setCellValueFactory(new PropertyValueFactory<>("Colaborador"));
+		tableColumnStockCodigo.setCellValueFactory(new PropertyValueFactory<>("idStock"));
+		tableColumnStockData.setCellValueFactory(new PropertyValueFactory<>("data"));
+		tableColumnStockColaborador.setCellValueFactory(new PropertyValueFactory<>("Colaborador"));
 
 		listStocks = stockDAO.listar();
 
@@ -97,15 +130,16 @@ public class ProcessoStockController implements Initializable {
 
 	public void selecionarItemTableViewPedidos(Stock stock) {
 		if (stock != null) {
-			labelCodigo.setText(String.valueOf(stock.getIdStock()));
-			labelDataStock.setText(String.valueOf(stock.getData().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))));
-			labelValor.setText(String.format("%.2f", stock.getValor()));
-			labelColaborador.setText(stock.getColaborador().toString());
+
+			labelCodigoStock.setText(String.valueOf(stock.getIdStock()));
+			labelDataStock.setText(String.valueOf(stock.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+			labelValorStock.setText(String.format("%.2f€", stock.getValor()));
+			labelColaboradorStock.setText(stock.getColaborador().toString());
 		} else {
-			labelCodigo.setText("");
+			labelCodigoStock.setText("");
 			labelDataStock.setText("");
-			labelValor.setText("");
-			labelColaborador.setText("");
+			labelValorStock.setText("");
+			labelColaboradorStock.setText("");
 		}
 	}
 
@@ -133,11 +167,11 @@ public class ProcessoStockController implements Initializable {
 	void buttonRevomerPedido(ActionEvent event) throws IOException, SQLException {
 		Stock stock = tableViewPedidos.getSelectionModel().getSelectedItem();
 		if (stock != null) {
-			for (ItemDeStock listItemStock : stock.getItensDeStock()) {
-				Produto produto = listItemStock.getProduto();
-				produto.setQuantidade(produto.getQuantidade() + listItemStock.getQuantidade());
+			for (ItemDeStock listItemDeStock : stock.getItensDeStock()) {
+				Produto produto = listItemDeStock.getProduto();
+				produto.setQuantidade(produto.getQuantidade() + listItemDeStock.getQuantidade());
 				produtoDAO.alterar(produto);
-				itemDeStockDAO.remover(listItemStock);
+				itemDeStockDAO.remover(listItemDeStock);
 			}
 			stockDAO.remover(stock);
 			carregarTableViewPedidos();
@@ -150,12 +184,14 @@ public class ProcessoStockController implements Initializable {
 
 	private boolean showProcessoStockPedido(Stock stock) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(ProcessoStockPedidoController.class.getResource("/pt/iade/gestaoInventario/views/ProcessoStockPedido.fxml"));
+		loader.setLocation(ProcessoStockPedidoController.class
+				.getResource("/pt/iade/gestaoInventario/views/ProcessoStockPedido.fxml"));
 		AnchorPane janela = (AnchorPane) loader.load();
-		
-		/** Mostrar uma tela de resgisto */
+
+		/** Mostrar tela de registo */
 		Stage pedidoStage = new Stage();
-		pedidoStage.setTitle("Registro de Pedido");
+		pedidoStage.setTitle("Registo de Itens do Pedido");
+		pedidoStage.setResizable(false);
 		Scene scene = new Scene(janela);
 		pedidoStage.setScene(scene);
 

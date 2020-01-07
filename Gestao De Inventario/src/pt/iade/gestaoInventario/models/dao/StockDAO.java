@@ -5,11 +5,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pt.iade.gestaoInventario.models.Colaborador;
 import pt.iade.gestaoInventario.models.ItemDeStock;
 import pt.iade.gestaoInventario.models.Stock;
@@ -22,14 +25,17 @@ import pt.iade.gestaoInventario.models.Stock;
 public class StockDAO {
 	
 	public boolean inserir(Stock stock) {
-		String sql = "INSERT INTO stocks(data, valor, idColaborador) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO stocks(data, valor, idColaborador) VALUES(?,?,?)";
 		Connection connection = DBConnection.conectar();
 		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			stmt.setDate(1, Date.valueOf(stock.getData()));
 			stmt.setDouble(2, stock.getValor());
 			stmt.setInt(3, stock.getColaborador().getIdColaborador());
 			stmt.execute();
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next())
+				stock.setIdStock(rs.getInt(1));
 			return true;
 		} catch (SQLException ex) {
 			Logger.getLogger(StockDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,10 +74,10 @@ public class StockDAO {
 		}
 	}
 
-	public List<Stock> listar() {
+	public ObservableList<Stock> listar() {
 		String sql = "SELECT * FROM stocks";
 		Connection connection = DBConnection.conectar();
-		List<Stock> retorno = new ArrayList<>();
+		ObservableList<Stock> retorno = FXCollections.observableArrayList();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			ResultSet resultado = stmt.executeQuery();
@@ -89,9 +95,8 @@ public class StockDAO {
 				ColaboradorDAO colaboradorDAO = new ColaboradorDAO();
 				colaborador = colaboradorDAO.buscar(colaborador);
 
-				/** Obtendo os dados completos dos Itens de Stock associados ao Stock. */
-				ItemDeStockDAO itemDeStockDAO = new ItemDeStockDAO();
-				itensDeStock = itemDeStockDAO.listarPorStock(stock);
+				new ItemDeStockDAO();
+				itensDeStock = ItemDeStockDAO.listarPorStock(stock);
 
 				stock.setColaborador(colaborador);
 				stock.setItensDeStock(itensDeStock);
@@ -135,7 +140,7 @@ public class StockDAO {
 			ResultSet resultado = stmt.executeQuery();
 
 			if (resultado.next()) {
-				retorno.setIdStock(resultado.getInt("max"));
+				retorno.setIdStock(resultado.getInt(1));
 				return retorno;
 			}
 		} catch (SQLException ex) {
@@ -143,5 +148,5 @@ public class StockDAO {
 		}
 		return retorno;
 	}
-
+	
 }

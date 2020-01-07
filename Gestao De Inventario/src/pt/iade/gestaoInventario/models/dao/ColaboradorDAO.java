@@ -34,7 +34,7 @@ public class ColaboradorDAO {
 	}
 
 	public boolean alterar(Colaborador colaborador) {
-		String sql = "UPDATE colaboradores SET nome=?, numero=? WERE idColaborador=?";
+		String sql = "UPDATE colaboradores SET nome=?, numero=?, telefone=? WHERE idColaborador=?";
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -51,7 +51,7 @@ public class ColaboradorDAO {
 	}
 
 	public boolean remover(Colaborador colaborador) {
-		String sql = "DELETE FROM colaboradores WERE idColaborador=?";
+		String sql = "DELETE FROM colaboradores WHERE idColaborador=?";
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);

@@ -24,7 +24,17 @@ import pt.iade.gestaoInventario.models.Produto;
 import pt.iade.gestaoInventario.models.Stock;
 import pt.iade.gestaoInventario.models.dao.ColaboradorDAO;
 import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
-
+/**
+ * 
+ * Controlador da interface principal do processo de pedido.
+ * Permite visualizar os pedidos feitos numa ListView
+ * Permite escolher um pedido e:
+ *    <li> Apagar
+ *    <li> Visualizar as informações do pedido ao lado
+ *	  <li> Visualizar os itens dos pedidos abrindo uma nova janela, chama o controlador {@link ItensDePedidoController} 
+ *Permite adicionar um pedido abrindo uma nova janela, chama o contralador {@link ProcessoStockPedidoController} 
+ *
+ */
 public class ProcessoStockPedidoController implements Initializable {
 	@FXML
 	private ComboBox<Colaborador> comboBoxPedidoColaborador;
@@ -78,6 +88,17 @@ public class ProcessoStockPedidoController implements Initializable {
 	private boolean buttonConfirmarClick = false;
 	private Stock stock;
 
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		carregarComboBoxColaboradores();
+		carregarComboBoxProdutos();
+
+		TableColumnItemStockProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
+		TableColumnItemStockQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+		TableColumnItemStockValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+
+	}
+	
 	private void carregarComboBoxProdutos() {
 
 		listProdutos = produtoDAO.listar();
@@ -128,6 +149,7 @@ public class ProcessoStockPedidoController implements Initializable {
 	void buttonAdiconarQuantidade(ActionEvent event) throws IOException {
 		Produto produto;
 		ItemDeStock itemDeStock = new ItemDeStock();
+		itemDeStock.setStock(stock);
 
 		if (comboBoxPedidoProduto.getSelectionModel().getSelectedItem() != null) {
 			produto = (Produto) comboBoxPedidoProduto.getSelectionModel().getSelectedItem();
@@ -143,7 +165,7 @@ public class ProcessoStockPedidoController implements Initializable {
 				observableListItensDeStock = FXCollections.observableArrayList(stock.getItensDeStock());
 				tableViewItensDeStock.setItems(observableListItensDeStock);
 
-				textFildTotalPedido.setText(String.format("%.2f", stock.getValor()));
+				textFildTotalPedido.setText(String.format("%.2f€", stock.getValor()));
 			} else {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setHeaderText("Problemas na escolha do Produto!");
@@ -196,16 +218,5 @@ public class ProcessoStockPedidoController implements Initializable {
 			alert.show();
 			return false;
 		}
-	}
-
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
-		carregarComboBoxColaboradores();
-		carregarComboBoxProdutos();
-
-		TableColumnItemStockProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
-		TableColumnItemStockQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-		TableColumnItemStockValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
-
 	}
 }

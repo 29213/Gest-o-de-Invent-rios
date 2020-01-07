@@ -1,5 +1,10 @@
 package pt.iade.gestaoInventario.models;
-
+/**
+ * 
+ * Classe de dados ou de dominio.
+ *
+ *
+ */
 public class Categoria {
 	private int idCategoria;
 	private String descricao;

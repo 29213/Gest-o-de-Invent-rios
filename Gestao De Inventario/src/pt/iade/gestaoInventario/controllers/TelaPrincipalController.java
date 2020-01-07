@@ -14,13 +14,10 @@ import pt.iade.gestaoInventario.Main;
 
 /**
  * Controlador da interface principal. 
- * Permite visualizar a tela de:
+ * Permite visualizar na tela os menus:
  * 	<li>Regsito de: Colaboaradores, Categorias e Produtos.
- * 	<li>Processo de Estoques.
- * 	<li>Inventários.
- * 
- * @author Legionario
- *
+ * 	<li>Processo de pedido.
+ * 	<li>Relatorio de Inventários.
  */
 
 public class TelaPrincipalController implements Initializable {

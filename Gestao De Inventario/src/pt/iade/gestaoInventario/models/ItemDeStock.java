@@ -1,5 +1,10 @@
 package pt.iade.gestaoInventario.models;
 
+/**
+ * 
+ * Classe de dados ou de dominio.
+ * 
+ */
 public class ItemDeStock {
 
 	private int idItemDeStock;
@@ -11,6 +16,7 @@ public class ItemDeStock {
 	public ItemDeStock() {
 
 	}
+
 
 	public int getIdItemDeStock() {
 		return idItemDeStock;

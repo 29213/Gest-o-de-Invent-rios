@@ -4,12 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pt.iade.gestaoInventario.models.Stock;
 import pt.iade.gestaoInventario.models.ItemDeStock;
 import pt.iade.gestaoInventario.models.Produto;
@@ -22,7 +21,7 @@ import pt.iade.gestaoInventario.models.Produto;
 public class ItemDeStockDAO {
 
 	public boolean inserir(ItemDeStock itemDeStock) {
-		String sql = "INSERT INTO itensdestock(quantidade, valor, idProduto, idStock) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO itensdestock(quantidade, valor, idProduto, idStock) VALUES (?,?,?,?)";
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -30,7 +29,6 @@ public class ItemDeStockDAO {
 			stmt.setDouble(2, itemDeStock.getValor());
 			stmt.setInt(3, itemDeStock.getProduto().getIdProduto());
 			stmt.setInt(4, itemDeStock.getStock().getIdStock());
-
 			stmt.execute();
 			return true;
 		} catch (SQLException ex) {
@@ -40,11 +38,26 @@ public class ItemDeStockDAO {
 	}
 
 	public boolean alterar(ItemDeStock itemDeStock) {
-		return true;
+		String sql = "UPDATE itensdestock SET quantidade =?, valor =?, idProduto =?, idStock =? WHERE idItemDeStock =?";
+		Connection connection = DBConnection.conectar();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setInt(1, itemDeStock.getQuantidade());
+			stmt.setDouble(2, itemDeStock.getValor());
+			stmt.setInt(3, itemDeStock.getProduto().getIdProduto());
+			stmt.setInt(4, itemDeStock.getStock().getIdStock());
+			stmt.execute();
+			return true;
+		} catch (SQLException ex) {
+			Logger.getLogger(ItemDeStockDAO.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		}
+				
+		
 	}
 
 	public boolean remover(ItemDeStock itemDeStock) {
-		String sql = "DELETE FROM itensDeStock WHERE idItemDeStock=?";
+		String sql = "DELETE FROM itensdestock WHERE idItemDeStock=?";
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -57,9 +70,9 @@ public class ItemDeStockDAO {
 		}
 	}
 
-	public List<ItemDeStock> listar() {
-		String sql = "SELECT * FROM itensDeStock";
-		List<ItemDeStock> retorno = new ArrayList<>();
+	public ObservableList<ItemDeStock> listar() {
+		String sql = "SELECT * FROM itensdestock";
+		ObservableList<ItemDeStock> retorno = FXCollections.observableArrayList();
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -94,9 +107,9 @@ public class ItemDeStockDAO {
 	}
 
 	/** Listar por Stock. */
-	public List<ItemDeStock> listarPorStock(Stock stock) {
-		String sql = "SELECT * FROM itensDeStock WHERE idStock=?";
-		List<ItemDeStock> retorno = new ArrayList<>();
+	public static ObservableList<ItemDeStock> listarPorStock(Stock stock) {
+		String sql = "SELECT * FROM itensdestock WHERE idStock=?";
+		ObservableList<ItemDeStock> retorno = FXCollections.observableArrayList();
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -127,9 +140,10 @@ public class ItemDeStockDAO {
 		}
 		return retorno;
 	}
+	
 
 	public ItemDeStock buscar (ItemDeStock itemDeStock) {
-		String sql = "SELECT * FROM itensDeStock WHERE idItemDeStock=?";
+		String sql = "SELECT * FROM itensdestock WHERE idItemDeStock=?";
 		ItemDeStock retorno = new ItemDeStock();
 		Connection connection = DBConnection.conectar();
 		try {

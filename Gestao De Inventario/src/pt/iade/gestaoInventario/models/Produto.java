@@ -1,5 +1,11 @@
 package pt.iade.gestaoInventario.models;
-
+/**
+ * 
+ * Classe de dados ou de dominio.
+ * 
+ * @author 50029213
+ *
+ */
 public class Produto {
 	private int idProduto;
 	private String nome;
@@ -62,5 +68,4 @@ public class Produto {
 	public String toString() {
 		return this.nome;
 	}
-
 }

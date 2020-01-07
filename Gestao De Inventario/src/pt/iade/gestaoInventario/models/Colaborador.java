@@ -1,5 +1,10 @@
 package pt.iade.gestaoInventario.models;
-
+/**
+ * 
+ * Classe de dados ou de dominio.
+ *
+ *@author Renato Simões
+ */
 public class Colaborador {
 	private int idColaborador;
 	private String nome;

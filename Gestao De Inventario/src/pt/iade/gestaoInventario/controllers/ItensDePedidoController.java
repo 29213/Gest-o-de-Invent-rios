@@ -1,36 +1,44 @@
 package pt.iade.gestaoInventario.controllers;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.util.Callback;
 import pt.iade.gestaoInventario.models.ItemDeStock;
+import pt.iade.gestaoInventario.models.Stock;
 import pt.iade.gestaoInventario.models.dao.ItemDeStockDAO;
-
+/**
+ * Controlador da interface de itens de pededido.
+ * Permite visualizar os itens dos pedidos numa listView.
+ *
+ */
 public class ItensDePedidoController implements Initializable {
 
 	@FXML
-	private ListView<ItemDeStock> listView = new ListView<>();
+	private ListView<ItemDeStock> listView;
+	
+	//private final  StockDAO StockDAO = new StockDAO();
+	
+	private Stock stock;
 
-	private List<ItemDeStock> listItens() {
-		List<ItemDeStock> retorno = new ArrayList<>();
-		retorno = itemDeStockDAO.listar();
-		return retorno;
+
+	public ItensDePedidoController(Stock stock) {
+		this.stock = stock;
 	}
 
-	private final ItemDeStockDAO itemDeStockDAO = new ItemDeStockDAO();
-	
+
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		listView.setItems(ItemDeStockDAO.listarPorStock(stock));
+	}
+	
+}
 
-		listView.getItems().addAll(listItens());
+
+		/**listView.getItems().addAll(itemDeStockDAO.listarPorStock());
 		listView.setCellFactory(new Callback<ListView<ItemDeStock>, ListCell<ItemDeStock>>() {
 
 			@Override
@@ -51,5 +59,4 @@ public class ItensDePedidoController implements Initializable {
 				return cell;
 			}
 		});
-	}
-}
+	}*/

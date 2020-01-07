@@ -18,9 +18,9 @@
                <children>
                   <TableView fx:id="tableViewPedidos" layoutX="51.0" layoutY="43.0" prefHeight="516.0" prefWidth="330.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="tableColumnCodigo" prefWidth="80.79998475313187" text="Código" />
-                      <TableColumn fx:id="tableColumnData" prefWidth="121.60000610351562" text="Data " />
-                        <TableColumn fx:id="tableColumnColaborador" prefWidth="127.20002746582031" text="Colaboardor" />
+                      <TableColumn fx:id="tableColumnStockCodigo" prefWidth="80.79998475313187" text="Código" />
+                      <TableColumn fx:id="tableColumnStockData" prefWidth="121.60000610351562" text="Data " />
+                        <TableColumn fx:id="tableColumnStockColaborador" prefWidth="127.20002746582031" text="Colaboardor" />
                     </columns>
                   </TableView>
                </children>
@@ -43,13 +43,13 @@
                         <Label text="Data" GridPane.rowIndex="1" />
                         <Label text="Colaborador" GridPane.rowIndex="2" />
                         <Label text="Valor" GridPane.rowIndex="3" />
-                        <Label fx:id="labelCodigo" GridPane.columnIndex="1" />
+                        <Label fx:id="labelCodigoStock" GridPane.columnIndex="1" />
                         <Label fx:id="labelDataStock" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="labelColaborador" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="labelValor" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="labelColaboradorStock" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="labelValorStock" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <Button fx:id="buttonPedido" layoutX="81.0" layoutY="343.0" mnemonicParsing="false" onAction="#buttonPedidoStock" prefHeight="26.0" prefWidth="94.0" text="Pedido" />
+                  <Button fx:id="buttonPedido" layoutX="81.0" layoutY="343.0" mnemonicParsing="false" onAction="#buttonPedidoStock" prefHeight="26.0" prefWidth="94.0" text="Adicionar" />
                   <Button fx:id="buttonRemover" layoutX="186.0" layoutY="343.0" mnemonicParsing="false" onAction="#buttonRevomerPedido" prefHeight="26.0" prefWidth="94.0" text="Remover" />
                   <Label layoutX="72.0" layoutY="14.0" text="Detalhes do Pedido">
                      <font>
