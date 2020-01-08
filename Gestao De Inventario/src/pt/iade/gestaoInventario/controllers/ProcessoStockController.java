@@ -18,12 +18,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import pt.iade.gestaoInventario.models.Colaborador;
 import pt.iade.gestaoInventario.models.ItemDeStock;
 import pt.iade.gestaoInventario.models.Produto;
@@ -111,6 +113,26 @@ public class ProcessoStockController implements Initializable {
 	public void selecionarItemTableViewPedidos(Stock stock) {
 		if (stock != null) {
 			listViewItensDePedido.setItems(ItemDeStockDAO.listarPorStock(stock));
+			listViewItensDePedido.setCellFactory(new Callback<ListView<ItemDeStock>, ListCell<ItemDeStock>>() {
+
+				@Override
+				public ListCell<ItemDeStock> call(ListView<ItemDeStock> param) {
+					ListCell<ItemDeStock> cell = new ListCell<ItemDeStock>() {
+
+						@Override
+						protected void updateItem(ItemDeStock item, boolean empty) {
+							super.updateItem(item, empty);
+							setText(null);
+							if (item != null) {
+								setText(((ItemDeStock) item).getProduto() + " -> Preço: "
+										+ ((ItemDeStock) item).getValor() + " -> Quantidade: " + ((ItemDeStock) item).getQuantidade());
+							}
+						}
+					};
+					return cell;
+				}
+			});
+			
 			labelCodigoStock.setText(String.valueOf(stock.getIdStock()));
 			labelDataStock.setText(String.valueOf(stock.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 			labelValorStock.setText(String.format("%.2f€", stock.getValor()));
