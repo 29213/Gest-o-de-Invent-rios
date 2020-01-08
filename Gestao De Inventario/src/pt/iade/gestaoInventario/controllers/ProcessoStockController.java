@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -73,8 +74,10 @@ public class ProcessoStockController implements Initializable {
 	@FXML
 	private Button buttonRemover;
 
+	@FXML
+	private ListView<ItemDeStock> listViewItensDePedido;
+	
 	private List<Stock> listStocks;
-
 	private ObservableList<Stock> observableListStocks;
 
 	/** Atributos para manipulação da base de dados */
@@ -84,9 +87,8 @@ public class ProcessoStockController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		
 		carregarTableViewPedidos();
-
 		/**
 		 * A Lista ativa diante de quaisquer alterações na seleção de itens da Tabela.
 		 */
@@ -94,31 +96,8 @@ public class ProcessoStockController implements Initializable {
 				.addListener((observable, oldValue, newValue) -> selecionarItemTableViewPedidos(newValue));
 	}
 
-	// ableViewPedidos.getSelectionModel().selectedItemProperty().addListener(observableListStocks,
-	// oldVal, newVal);{
-	// if (newVal!= null) {
-	// new Stage();
-	// }
-	// try {
-	// FXMLLoader loader = new FXMLLoader();
-	// loader.setLocation(ProcessoStockPedidoController.class.getResource("/pt/iade/gestaoInventario/views/ItensDePedido.fxml"));
-	// AnchorPane janela = (AnchorPane) loader.load();
-
-	// /** Mostrar tela de itens do pedido */
-	// Stage Stage = new Stage();
-	// Stage.setTitle("Itens do Pedido");
-	// Stage.setResizable(false);
-	// Scene scene = new Scene(janela);
-	// Stage.setScene(scene);
-	// Stage.show();
-	// }
-	// catch (Exception e) {
-	// Logger.getLogger(StockDAO.class.getName()).log(Level.SEVERE,null, e);
-	// }
-
 	public void carregarTableViewPedidos() {
 
-		tableColumnStockCodigo.setCellValueFactory(new PropertyValueFactory<>("idStock"));
 		tableColumnStockData.setCellValueFactory(new PropertyValueFactory<>("data"));
 		tableColumnStockColaborador.setCellValueFactory(new PropertyValueFactory<>("Colaborador"));
 
@@ -126,11 +105,12 @@ public class ProcessoStockController implements Initializable {
 
 		observableListStocks = FXCollections.observableArrayList(listStocks);
 		tableViewPedidos.setItems(observableListStocks);
+
 	}
 
 	public void selecionarItemTableViewPedidos(Stock stock) {
 		if (stock != null) {
-
+			listViewItensDePedido.setItems(ItemDeStockDAO.listarPorStock(stock));
 			labelCodigoStock.setText(String.valueOf(stock.getIdStock()));
 			labelDataStock.setText(String.valueOf(stock.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 			labelValorStock.setText(String.format("%.2f€", stock.getValor()));
@@ -140,6 +120,8 @@ public class ProcessoStockController implements Initializable {
 			labelDataStock.setText("");
 			labelValorStock.setText("");
 			labelColaboradorStock.setText("");
+			
+			
 		}
 	}
 
