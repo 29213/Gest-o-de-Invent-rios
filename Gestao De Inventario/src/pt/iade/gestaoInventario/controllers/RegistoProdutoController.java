@@ -23,11 +23,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import pt.iade.gestaoInventario.models.Categoria;
 import pt.iade.gestaoInventario.models.Produto;
 import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
-
-public class RegistoProdutoController implements Initializable {
+/**
+* Controlador da interface principal, registo de Produtos.
+* Permite visualizar os produtos registados, numa TableView.
+* Permite escolher um produto e:
+*    <li> Visualizar as informações do produto ao lado;
+*	  <li> Alterar os dados do produto abrindo uma nova janela, chama o controlador {@link RegistoProdutoStageController};
+*	  <li> Editar o nome e a quantidade do produto escolhido na tableView.
+*Permite adicionar um coladorador abrindo uma nova janela, chama o contralador {@link RegistoProdutoStageController}.
+*
+**/
+	public class RegistoProdutoController implements Initializable {
 
 	@FXML
 	private AnchorPane anchorPane;
@@ -79,13 +89,12 @@ public class RegistoProdutoController implements Initializable {
 
 	@FXML
 	private Button buttonAdicionar;
-	
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		
+
 		selecionarItemTableViewProduto(null);
-		
+
 		carregarTableViewProdutos();
 
 		tableViewProdutos.getSelectionModel().selectedItemProperty()
@@ -94,7 +103,8 @@ public class RegistoProdutoController implements Initializable {
 		tableViewProdutos.setEditable(true);
 
 		tableColumnProdutoNome.setCellFactory(TextFieldTableCell.forTableColumn());
-		
+		tableColumnProdutoQuantidade.setCellFactory(TextFieldTableCell.<Produto, Integer>forTableColumn(new IntegerStringConverter()));
+
 	}
 
 	@FXML
@@ -102,8 +112,8 @@ public class RegistoProdutoController implements Initializable {
 		Produto produto = new Produto();
 		boolean buttonConfirmarClick = showRegistoProdutoStage(produto);
 		if (buttonConfirmarClick) {
-			produtoDAO.inserir(produto);
-			carregarTableViewProdutos();
+				produtoDAO.inserir(produto);
+				carregarTableViewProdutos();
 		}
 	}
 
@@ -124,7 +134,6 @@ public class RegistoProdutoController implements Initializable {
 		}
 	}
 
-
 	private void carregarTableViewProdutos() {
 
 		tableColumnProdutoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -136,7 +145,6 @@ public class RegistoProdutoController implements Initializable {
 		tableViewProdutos.setItems(observableListProdutos);
 
 	}
-
 
 	private void selecionarItemTableViewProduto(Produto produto) {
 		if (produto != null) {
@@ -153,7 +161,7 @@ public class RegistoProdutoController implements Initializable {
 			lableProdutoCategoria.setText("");
 		}
 	}
-	
+
 	public boolean showRegistoProdutoStage(Produto produto) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(RegistoColaboradorStageController.class
@@ -179,12 +187,12 @@ public class RegistoProdutoController implements Initializable {
 	}
 
 	@FXML
-	void onEditNome(TableColumn.CellEditEvent<Produto, String> ProdutoStringCellEditEvent)throws IOException {
+	void onEditNome(TableColumn.CellEditEvent<Produto, String> ProdutoStringCellEditEvent) throws IOException {
 		tableViewProdutos.setItems(observableListProdutos);
 		Produto produto = tableViewProdutos.getSelectionModel().getSelectedItem();
 		produto.setNome(ProdutoStringCellEditEvent.getNewValue());
 		produtoDAO.alterar(produto);
-		
+
 	}
 
 	@FXML
