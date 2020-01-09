@@ -16,9 +16,8 @@ import pt.iade.gestaoInventario.models.Produto;
 import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
 /**
- * 
- * Esta classe nos apresenta uma lista de produtos(Código, nome, quantidade e categoria) que estão em Stock de forma iterativa, 
- * a lista é atualizada automaticamente com a sainda e entrada de produtos no Stock.
+ * Controlador da interface principal, relatorio de inventario
+ * Permite visualizar todos os produtos registados numa TableView.
  *
  */
 public class RelatorioInventarioController implements Initializable {
@@ -48,7 +47,7 @@ public class RelatorioInventarioController implements Initializable {
 			carregarTableViewProdutos();
 			
 		}
-	    
+	    /** Configuração da tableView*/
 		public void carregarTableViewProdutos() {
 			tableColumnProdutoCodigo.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
 			tableColumnProdutoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
