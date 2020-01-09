@@ -1,5 +1,6 @@
 package pt.iade.gestaoInventario.controllers;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,10 +15,19 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import pt.iade.gestaoInventario.models.Categoria;
 import pt.iade.gestaoInventario.models.dao.CategoriaDAO;
 
-public class RegistoCategoriaController implements Initializable {
+/**
+ * 
+ * Controlador da interface principal, registo de Categoria.
+ * Permite visualizar as categorias registadas numa TableView.
+ * Permite adicionar categorias
+ * Permite alterar a descrição da categoria selecionada apartir da tebleView.
+ * 
+ */
+	public class RegistoCategoriaController implements Initializable {
 	@FXML
 	private TextField textFieldDescrição;
 	@FXML
@@ -34,20 +44,26 @@ public class RegistoCategoriaController implements Initializable {
 	private List<Categoria> listCategorias;
 
 	private ObservableList<Categoria> observableListCategorias;
-	
-	
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		carregarTableViewCategorias();
+		tableViewCategorias.setEditable(true);
+		tableColumnCategoria.setCellFactory(TextFieldTableCell.forTableColumn());
+	}
 
 	@FXML
 	void adicionarCategoria(ActionEvent event) {
 		Categoria categoria = new Categoria();
 		if (validarEntradaDeDados()) {
 			categoria.setDescricao(textFieldDescrição.getText());
-			CategoriaDAO.inserir(categoria);
+			categoriaDAO.inserir(categoria);
 		}
-		
+
 		carregarTableViewCategorias();
 	}
 
+	/** Configuração da tableView */
 	void carregarTableViewCategorias() {
 
 		tablecolumnId.setCellValueFactory(new PropertyValueFactory<>("idCategoria"));
@@ -59,11 +75,10 @@ public class RegistoCategoriaController implements Initializable {
 		tableViewCategorias.setItems(observableListCategorias);
 
 	}
-	
+
 	/** Validar entrada de dados para o registo. */
 	private boolean validarEntradaDeDados() {
 		String errorMessage = "";
-
 
 		if (textFieldDescrição.getText() == null || textFieldDescrição.getText().length() == 0) {
 			errorMessage += "Escreve a descrição!\n";
@@ -81,8 +96,14 @@ public class RegistoCategoriaController implements Initializable {
 			return false;
 		}
 	}
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		carregarTableViewCategorias();
-	}
+
+	@FXML
+    void onEditCategoria(TableColumn.CellEditEvent<Categoria, String> CategoriaStringCellEditEvent) throws IOException  {
+		tableViewCategorias.setItems(observableListCategorias);
+		Categoria categoria = tableViewCategorias.getSelectionModel().getSelectedItem();
+		categoria.setDescricao(CategoriaStringCellEditEvent.getNewValue());
+		categoriaDAO.alterar(categoria);
+    }
+	
+
 }
