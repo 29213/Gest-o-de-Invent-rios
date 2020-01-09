@@ -33,14 +33,13 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 import pt.iade.gestaoInventario.models.dao.StockDAO;
 
 /**
- * Controlador da interface principal do processo de pedido. Permite visualizar
- * os pedidos feitos numa ListView Permite escolher um pedido e:
- * <li>Apagar
- * <li>Visualizar as informações do pedido ao lado
- * <li>Visualizar os itens dos pedidos abrindo uma nova janela, chama o
- * controlador {@link ItensDePedidoController} Permite adicionar um pedido
- * abrindo uma nova janela, chama o contralador
- * {@link ProcessoStockPedidoController}
+ * Controlador da interface principal do processo de pedido. 
+ * Permite visualizar os pedidos feitos numa TableView.
+ * Permite escolher um pedido e:
+ * <li>Visualizar as informações do pedido ao lado "detalhes do pedido";
+ * <li>Visualizar os itens dos pedidos feitos numa ListView;
+ * <li>Apagar o pedido;
+ * Permite adicionar um pedido abrindo uma nova janela, chama o contralador{@link ProcessoStockPedidoController}
  * 
  */
 public class ProcessoStockController implements Initializable {
@@ -90,12 +89,12 @@ public class ProcessoStockController implements Initializable {
 		
 		carregarTableViewPedidos();
 		/**
-		 * A Lista ativa diante de quaisquer alterações na seleção de itens da Tabela.
+		 * A Lista ativa diante de quaisquer alterações na seleção dos pedidos da Tabela.
 		 */
 		tableViewPedidos.getSelectionModel().selectedItemProperty()
 				.addListener((observable, oldValue, newValue) -> selecionarItemTableViewPedidos(newValue));
 	}
-
+	/**Configuração da tabela de pedidos*/
 	public void carregarTableViewPedidos() {
 
 		tableColumnStockData.setCellValueFactory(new PropertyValueFactory<>("data"));
@@ -110,7 +109,8 @@ public class ProcessoStockController implements Initializable {
 
 	public void selecionarItemTableViewPedidos(Stock stock) {
 		if (stock != null) {
-			listViewItensDePedido.setItems(ItemDeStockDAO.listarPorStock(stock));
+			listViewItensDePedido.setItems(ItemDeStockDAO.listarPorStock(stock));/** Listar os itens do pedido selecionado*/
+		/** Apresentar a informação do pedido selecionado, detalhes do pedido*/
 			labelCodigoStock.setText(String.valueOf(stock.getIdStock()));
 			labelDataStock.setText(String.valueOf(stock.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 			labelValorStock.setText(String.format("%.2f€", stock.getValor()));
@@ -163,7 +163,7 @@ public class ProcessoStockController implements Initializable {
 			alert.show();
 		}
 	}
-
+	/** Apresentar a janela de registo de pedido*/
 	private boolean showProcessoStockPedido(Stock stock) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(ProcessoStockPedidoController.class
