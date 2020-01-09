@@ -24,16 +24,18 @@ import pt.iade.gestaoInventario.models.Produto;
 import pt.iade.gestaoInventario.models.Stock;
 import pt.iade.gestaoInventario.models.dao.ColaboradorDAO;
 import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
+
 /**
  * 
- * Controlador da interface principal do processo de pedido.
- * Permite visualizar os pedidos feitos numa ListView
- * Permite escolher um pedido e:
- *    <li> Apagar
- *    <li> Visualizar as informações do pedido ao lado
- *	  <li> Visualizar os itens dos pedidos abrindo uma nova janela, chama o controlador {@link ItensDePedidoController} 
- *Permite adicionar um pedido abrindo uma nova janela, chama o contralador {@link ProcessoStockPedidoController} 
- *
+ * Controlador da interface do registo de itens de pedido.
+ *  Permite selecionar o colaborador apartir de uma Combobox.
+ *  Permite selecionar uma data.
+ *  Permite selecionar os produtos e:
+ *  <li> Adicionar as quantidadades desejadas.
+ * <li>Visualizar as informações dos produtos numa tableView.
+ * Permite confirmar o registo dos itens de pedido, fechar a janela e gera o pedido.
+ * Permite cancelar o registo de itens de pedido e fecha a janela.
+ *  
  */
 public class ProcessoStockPedidoController implements Initializable {
 	@FXML
@@ -91,20 +93,12 @@ public class ProcessoStockPedidoController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		carregarComboBoxColaboradores();
-		carregarComboBoxProdutos();
+		carregarComboxProdutos();
 
 		TableColumnItemStockProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
 		TableColumnItemStockQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
 		TableColumnItemStockValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
 
-	}
-	
-	private void carregarComboBoxProdutos() {
-
-		listProdutos = produtoDAO.listar();
-
-		observableListProdutos = FXCollections.observableArrayList(listProdutos);
-		comboBoxPedidoProduto.setItems(observableListProdutos);
 	}
 
 	public void carregarComboBoxColaboradores() {
@@ -213,7 +207,7 @@ public class ProcessoStockPedidoController implements Initializable {
 
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Erro no Registo");
-			alert.setHeaderText("Campos invalidos, corrija...");
+			alert.setHeaderText("Campos invalidos!");
 			alert.setContentText(errorMessage);
 			alert.show();
 			return false;
