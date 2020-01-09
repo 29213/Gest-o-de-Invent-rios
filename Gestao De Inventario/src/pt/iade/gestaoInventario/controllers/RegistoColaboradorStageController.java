@@ -64,7 +64,7 @@ public class RegistoColaboradorStageController implements Initializable {
 	public void setColaborador(Colaborador colaborador) {
 		this.colaborador = colaborador;
 		this.textFieldColaboradorNome.setText(colaborador.getNome());
-		this.textFieldColaboradorNumero.setText(String.valueOf(colaborador.getNumero()));
+		this.textFieldColaboradorNumero.setPromptText(String.valueOf(colaborador.getNumero()));
 		this.textFieldColaboradorTelefone.setText(colaborador.getTelefone());
 	}
 

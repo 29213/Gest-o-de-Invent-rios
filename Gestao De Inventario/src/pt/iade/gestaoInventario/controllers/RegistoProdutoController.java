@@ -179,7 +179,7 @@ public class RegistoProdutoController implements Initializable {
 	}
 
 	@FXML
-	void onEditNome(TableColumn.CellEditEvent<Produto, String> ProdutoStringCellEditEvent) {
+	void onEditNome(TableColumn.CellEditEvent<Produto, String> ProdutoStringCellEditEvent)throws IOException {
 		tableViewProdutos.setItems(observableListProdutos);
 		Produto produto = tableViewProdutos.getSelectionModel().getSelectedItem();
 		produto.setNome(ProdutoStringCellEditEvent.getNewValue());
@@ -188,10 +188,11 @@ public class RegistoProdutoController implements Initializable {
 	}
 
 	@FXML
-	void onEditQuantidade(TableColumn.CellEditEvent<Produto, Integer> ProdutoIngegerCellEditEvent) {
+	void onEditQuantidade(TableColumn.CellEditEvent<Produto, Integer> ProdutoIngegerCellEditEvent) throws IOException {
 		tableViewProdutos.setItems(observableListProdutos);
 		Produto produto = tableViewProdutos.getSelectionModel().getSelectedItem();
 		produto.setQuantidade(ProdutoIngegerCellEditEvent.getNewValue());
+		produtoDAO.alterar(produto);
 
 	}
 }

@@ -19,12 +19,11 @@ public class Stock {
 
 	}
 
-	public Stock(int idStock, LocalDate data, double valor, Colaborador colaborador) {
-		super();
+	public Stock(int idStock, LocalDate data, double valor) {
 		this.idStock = idStock;
 		this.data = data;
 		this.valor = valor;
-		this.colaborador = colaborador;
+		
 	}
 
 

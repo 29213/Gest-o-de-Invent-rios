@@ -16,6 +16,12 @@ public class ItemDeStock {
 	public ItemDeStock() {
 
 	}
+	
+	public ItemDeStock(int idItemDeStock, int quantidade, double valor) {
+		this.idItemDeStock = idItemDeStock;
+		this.quantidade = quantidade;
+		this.valor = valor;
+	}
 
 
 	public int getIdItemDeStock() {
@@ -56,6 +62,12 @@ public class ItemDeStock {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+	@Override
+	public String toString() {
+		return produto + " -> " + quantidade + " -> Preço: "+ 
+	String.format("%.2f€", getValor());
 	}
 
 }

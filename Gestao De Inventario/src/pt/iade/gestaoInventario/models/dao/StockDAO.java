@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,6 +72,7 @@ public class StockDAO {
 		}
 	}
 
+	
 	public ObservableList<Stock> listar() {
 		String sql = "SELECT * FROM stocks";
 		Connection connection = DBConnection.conectar();
@@ -84,7 +83,7 @@ public class StockDAO {
 			while (resultado.next()) {
 				Stock stock = new Stock();
 				Colaborador colaborador = new Colaborador();
-				List<ItemDeStock> itensDeStock = new ArrayList<ItemDeStock>();
+				ObservableList<ItemDeStock> itensDeStock = FXCollections.observableArrayList();
 
 				stock.setIdStock(resultado.getInt("idStock"));
 				stock.setData(resultado.getDate("data").toLocalDate());

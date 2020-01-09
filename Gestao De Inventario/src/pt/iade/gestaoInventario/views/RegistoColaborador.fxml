@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iade.gestaoInventario.controllers.RegistoColaboradorController">
    <children>
-    <AnchorPane layoutX="39.0" layoutY="100.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="328.0">
+    <AnchorPane layoutX="39.0" layoutY="77.0" minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="328.0">
          <children>
             <TableView fx:id="tableViewColaboradores" layoutX="26.0" layoutY="-3.0" prefHeight="376.0" prefWidth="350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
@@ -22,7 +22,7 @@
             </TableView>
          </children>
       </AnchorPane>
-    <AnchorPane layoutX="367.0" layoutY="100.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="350.0">
+    <AnchorPane layoutX="400.0" layoutY="69.0" minHeight="0.0" minWidth="0.0" prefHeight="446.0" prefWidth="350.0">
          <children>
             <GridPane layoutX="34.0" layoutY="99.0" prefHeight="202.0" prefWidth="282.0">
               <columnConstraints>
@@ -49,12 +49,17 @@
             <Button fx:id="buttonAdicionar" layoutX="32.0" layoutY="359.0" mnemonicParsing="false" onAction="#AdicionarColaborador" prefHeight="26.0" prefWidth="90.0" text="Adicionar" />
             <Button fx:id="buttonAlterar" layoutX="132.0" layoutY="359.0" mnemonicParsing="false" onAction="#AlterarColaborador" prefHeight="26.0" prefWidth="90.0" text="Alterar" />
             <Button fx:id="buttonRemover" layoutX="232.0" layoutY="359.0" mnemonicParsing="false" onAction="#RemoverColaborador" prefHeight="26.0" prefWidth="90.0" text="Remover" />
-            <Label layoutX="36.0" layoutY="14.0" text="Detalhes do Colaborador">
+            <Label layoutX="36.0" layoutY="14.0" text="Detalhes do colaborador">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
+      <Label layoutX="76.0" layoutY="26.0" text="Lista de colaboradores">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

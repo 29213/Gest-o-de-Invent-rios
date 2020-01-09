@@ -28,12 +28,12 @@
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane layoutX="355.0" layoutY="29.0" prefHeight="447.0" prefWidth="330.0">
+          <AnchorPane layoutX="355.0" layoutY="29.0" prefHeight="447.0" prefWidth="353.0">
                <children>
-                  <Button fx:id="buttonPedido" layoutX="120.0" layoutY="414.0" mnemonicParsing="false" onAction="#buttonPedidoStock" prefHeight="26.0" prefWidth="94.0" text="Adicionar" />
-                  <Button fx:id="buttonRemover" layoutX="228.0" layoutY="414.0" mnemonicParsing="false" onAction="#buttonRevomerPedido" prefHeight="26.0" prefWidth="94.0" text="Remover" />
-                  <ListView fx:id="listViewItensDePedido" layoutY="2.0" prefHeight="234.0" prefWidth="330.0" />
-                  <Label layoutX="81.0" layoutY="248.0" text="Detalhes do Pedido">
+                  <Button fx:id="buttonPedido" layoutX="131.0" layoutY="414.0" mnemonicParsing="false" onAction="#buttonPedidoStock" prefHeight="26.0" prefWidth="94.0" text="Adicionar" />
+                  <Button fx:id="buttonRemover" layoutX="239.0" layoutY="414.0" mnemonicParsing="false" onAction="#buttonRevomerPedido" prefHeight="26.0" prefWidth="94.0" text="Remover" />
+                  <ListView fx:id="listViewItensDePedido" layoutY="2.0" prefHeight="234.0" prefWidth="354.0" />
+                  <Label layoutX="85.0" layoutY="248.0" text="Detalhes do Pedido">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -67,7 +67,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label layoutX="385.0" layoutY="-18.0" text="Lista de Itens do Pedido">
+            <Label layoutX="397.0" layoutY="-18.0" text="Lista de Itens do Pedido">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

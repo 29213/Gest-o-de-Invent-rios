@@ -11,16 +11,9 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iade.gestaoInventario.controllers.RegistoCategoriaController">
    <children>
-      <Group layoutX="254.0" layoutY="54.0">
+      <Group layoutX="251.0" layoutY="19.0">
          <children>
-            <Button layoutX="225.0" layoutY="467.0" mnemonicParsing="false" onAction="#adicionarCategoria" text="Adicionar" />
-            <Label layoutY="470.0" text="Descrição">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="textFieldDescrição" layoutX="71.0" layoutY="467.0" prefHeight="26.0" prefWidth="144.0" />
-            <TableView fx:id="tableViewCategorias" layoutX="1.0" layoutY="48.0" prefHeight="398.0" prefWidth="290.0">
+            <TableView fx:id="tableViewCategorias" layoutX="1.0" layoutY="48.0" prefHeight="431.0" prefWidth="294.0">
               <columns>
                 <TableColumn fx:id="tablecolumnId" prefWidth="75.0" text="Código" />
                 <TableColumn fx:id="tableColumnCategoria" prefWidth="75.0" text="Categoria" />
@@ -29,12 +22,23 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label layoutX="65.0" text="Lista de Categorias">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
          </children>
       </Group>
+      <Label layoutX="293.0" layoutY="23.0" text="Lista de Categorias">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="253.0" layoutY="516.0">
+         <children>
+            <Button layoutX="225.0" mnemonicParsing="false" onAction="#adicionarCategoria" text="Adicionar" />
+            <Label layoutY="3.0" text="Descrição">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textFieldDescrição" layoutX="71.0" prefHeight="26.0" prefWidth="144.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -84,8 +84,8 @@ public class RegistoProdutoStageController implements Initializable {
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 		this.textFieldProdutoNome.setText(produto.getNome());
-		this.textFieldProdutoPreco.setText(String.valueOf(produto.getPreco()));
-		this.textFieldProdutoQuantidade.setText(String.valueOf(produto.getQuantidade()));
+		this.textFieldProdutoPreco.setPromptText(String.valueOf(produto.getPreco()));
+		this.textFieldProdutoQuantidade.setPromptText(String.valueOf(produto.getQuantidade()));
 		this.comboBoxProdutoCategoria.getSelectionModel().getSelectedItem();
 	}
 
