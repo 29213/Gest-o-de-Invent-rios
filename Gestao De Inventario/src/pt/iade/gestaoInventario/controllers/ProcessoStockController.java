@@ -163,7 +163,7 @@ public class ProcessoStockController implements Initializable {
 			alert.show();
 		}
 	}
-	/** Apresentar a janela de registo de pedido*/
+	/** Apresentar a janela de registo de itens do pedido*/
 	private boolean showProcessoStockPedido(Stock stock) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(ProcessoStockPedidoController.class
