@@ -24,16 +24,17 @@ import pt.iade.gestaoInventario.models.Colaborador;
 import pt.iade.gestaoInventario.models.dao.ColaboradorDAO;
 /**
  * 
- * Controlador da interface principal de registo de Colaborador.
- * Permite visualizar os colaboradores registados, numa ListView.
+ * Controlador da interface principal, registo de Colaborador.
+ * Permite visualizar os colaboradores registados, numa TableView.
  * Permite escolher um colaborador e:
- *    <li> Visualizar as informações do pedido ao lado;
+ *    <li> Visualizar as informações do colaborador ao lado;
  *	  <li> Alterar os dados do colaborador abrindo uma nova janela, chama o controlador {@link RegistoColaboradorStageController};
  *	  <li> Apagar; 
+ *	  <li> Editar o nome e a quantidade do produto escolhido
  *Permite adicionar um coladorador abrindo uma nova janela, chama o contralador {@link RegistoColaboradorStageController}.
  *
  */
-public class RegistoColaboradorController implements Initializable {
+	public class RegistoColaboradorController implements Initializable {
 
 	@FXML
 	private TableView<Colaborador> tableViewColaboradores;
