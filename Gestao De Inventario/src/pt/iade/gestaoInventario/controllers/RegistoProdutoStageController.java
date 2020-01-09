@@ -17,7 +17,13 @@ import javafx.stage.Stage;
 import pt.iade.gestaoInventario.models.Categoria;
 import pt.iade.gestaoInventario.models.Produto;
 import pt.iade.gestaoInventario.models.dao.CategoriaDAO;
-
+/**
+ * 
+ * Controlador a interface para o registo dos produtos.
+ * Permite adicionar os dados do produto.
+ * Permite alterar os dados do produto escolhido na tabela.
+ *
+ */
 public class RegistoProdutoStageController implements Initializable {
 	@FXML
 	private TextField textFieldProdutoNome;
