@@ -11,7 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import pt.iade.gestaoInventario.models.Colaborador;
-
+/**
+ * Controlador da interface do registo do colaborador;
+ * Permite adicionar os dados do colaboarar.
+ * Permite alterar os dados do colaborador selecionado.
+ */
 public class RegistoColaboradorStageController implements Initializable {
 
 	@FXML
@@ -106,7 +110,7 @@ public class RegistoColaboradorStageController implements Initializable {
 			/** Mostrar a mensagem de erro. */
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 			alert.setTitle("Erro no registo");
-			alert.setHeaderText("Campos invalidos, corrija...");
+			alert.setHeaderText("Campos invalidos");
 			alert.setContentText(errorMessage);
 			alert.show();
 			return false;
