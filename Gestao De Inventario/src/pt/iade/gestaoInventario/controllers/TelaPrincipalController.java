@@ -13,11 +13,13 @@ import javafx.scene.layout.AnchorPane;
 import pt.iade.gestaoInventario.Main;
 
 /**
- * Controlador da interface principal. 
+ * Controlador da interface Tela principal. 
  * Permite visualizar na tela os menus:
- * 	<li>Regsito de: Colaboaradores, Categorias e Produtos.
- * 	<li>Processo de pedido.
- * 	<li>Relatorio de Inventários.
+ * 	<li> Regsito de Colaboaradores {@link RegistoColaboradorController}, 
+ *  <li> Regsito de Categorias {@link RegistoCategoriaController},
+ *  <li> Registo de Produtos {@link RegistoProdutoController},
+ * 	<li> Processo de pedido {@link ProcessoStockController}
+ * 	<li> Relatorio de Inventários {@link RelatorioInventarioController}
  */
 
 public class TelaPrincipalController implements Initializable {
