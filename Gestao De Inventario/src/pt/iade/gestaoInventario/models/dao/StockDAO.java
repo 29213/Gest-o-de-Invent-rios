@@ -17,7 +17,7 @@ import pt.iade.gestaoInventario.models.Stock;
 
 /**
  * 
- * Esta classe permite ter intereção com a base de dados.
+ * Esta classe permite ter interação com a base de dados.
  *
  */
 public class StockDAO {
