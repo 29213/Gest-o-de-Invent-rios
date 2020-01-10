@@ -17,7 +17,7 @@ import pt.iade.gestaoInventario.models.Categoria;
  *
  */
 public class CategoriaDAO {
-	public static boolean inserir(Categoria categoria) {
+	public boolean inserir(Categoria categoria) {
 		String sql = "INSERT INTO categorias(descricao) VALUES(?)";
 		Connection connection = DBConnection.conectar();
 		try {

@@ -18,7 +18,7 @@ import pt.iade.gestaoInventario.models.Produto;
  * Esta classe permite ter interação com a base de dados.
  *
  */
-public class ItemDeStockDAO {
+	public class ItemDeStockDAO {
 
 	public boolean inserir(ItemDeStock itemDeStock) {
 		String sql = "INSERT INTO itensdestock(quantidade, valor, idProduto, idStock) VALUES (?,?,?,?)";

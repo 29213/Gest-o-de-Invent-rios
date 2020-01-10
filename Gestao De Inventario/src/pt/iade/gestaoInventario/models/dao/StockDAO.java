@@ -21,12 +21,12 @@ import pt.iade.gestaoInventario.models.Stock;
  *
  */
 public class StockDAO {
-	
+
 	public boolean inserir(Stock stock) {
 		String sql = "INSERT INTO stocks(data, valor, idColaborador) VALUES(?,?,?)";
 		Connection connection = DBConnection.conectar();
 		try {
-			PreparedStatement stmt = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			stmt.setDate(1, Date.valueOf(stock.getData()));
 			stmt.setDouble(2, stock.getValor());
 			stmt.setInt(3, stock.getColaborador().getIdColaborador());
@@ -72,7 +72,6 @@ public class StockDAO {
 		}
 	}
 
-	
 	public ObservableList<Stock> listar() {
 		String sql = "SELECT * FROM stocks";
 		Connection connection = DBConnection.conectar();
@@ -147,5 +146,5 @@ public class StockDAO {
 		}
 		return retorno;
 	}
-	
+
 }
