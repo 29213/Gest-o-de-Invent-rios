@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 /**
  * 
- * Classe de dados ou de dominio.
+ * Classe de dados.
  * 
  *
  */

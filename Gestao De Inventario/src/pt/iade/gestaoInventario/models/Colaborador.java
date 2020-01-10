@@ -1,7 +1,7 @@
 package pt.iade.gestaoInventario.models;
 /**
  * 
- * Classe de dados ou de dominio.
+ * Classe de dados.
  *
  *@author Renato Simões
  */

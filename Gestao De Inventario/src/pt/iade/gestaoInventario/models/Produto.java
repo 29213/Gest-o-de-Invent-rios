@@ -1,9 +1,7 @@
 package pt.iade.gestaoInventario.models;
 /**
  * 
- * Classe de dados ou de dominio.
- * 
- * @author 50029213
+ * Classe de dados.
  *
  */
 public class Produto {
