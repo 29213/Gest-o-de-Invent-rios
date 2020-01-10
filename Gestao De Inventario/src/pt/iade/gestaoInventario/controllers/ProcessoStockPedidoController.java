@@ -27,12 +27,12 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
 /**
  * 
- * Controlador da interface do registo de itens de pedido.
+ * Controlador da interface do registo dos itens do pedido.
  *  Permite selecionar o colaborador apartir de uma Combobox.
  *  Permite selecionar uma data.
  *  Permite selecionar os produtos e:
  *  <li> Adicionar as quantidadades desejadas.
- * <li>Visualizar as informações dos produtos numa tableView.
+ *  <li> Visualizar as informações dos produtos numa tableView.
  * Permite confirmar o registo dos itens de pedido, fechar a janela e gera o pedido.
  * Permite cancelar o registo de itens de pedido e fecha a janela.
  *  
@@ -48,7 +48,7 @@ public class ProcessoStockPedidoController implements Initializable {
 	private ComboBox<Produto> comboBoxPedidoProduto;
 
 	@FXML
-	private TextField textFildPedidoItemStock;
+	private TextField textFildProdutoQuantidade;
 
 	@FXML
 	private Button buttanAdicionar;
@@ -141,6 +141,7 @@ public class ProcessoStockPedidoController implements Initializable {
 
 	@FXML
 	void buttonAdiconarQuantidade(ActionEvent event) throws IOException {
+		
 		Produto produto;
 		ItemDeStock itemDeStock = new ItemDeStock();
 		itemDeStock.setStock(stock);
@@ -148,9 +149,9 @@ public class ProcessoStockPedidoController implements Initializable {
 		if (comboBoxPedidoProduto.getSelectionModel().getSelectedItem() != null) {
 			produto = (Produto) comboBoxPedidoProduto.getSelectionModel().getSelectedItem();
 
-			if (produto.getQuantidade() >= Integer.parseInt(textFildPedidoItemStock.getText())) {
+			if (produto.getQuantidade() >= Integer.parseInt(textFildProdutoQuantidade.getText())) {
 				itemDeStock.setProduto((Produto) comboBoxPedidoProduto.getSelectionModel().getSelectedItem());
-				itemDeStock.setQuantidade(Integer.parseInt(textFildPedidoItemStock.getText()));
+				itemDeStock.setQuantidade(Integer.parseInt(textFildProdutoQuantidade.getText()));
 				itemDeStock.setValor(itemDeStock.getProduto().getPreco() * itemDeStock.getQuantidade());
 
 				stock.getItensDeStock().add(itemDeStock);
@@ -160,6 +161,7 @@ public class ProcessoStockPedidoController implements Initializable {
 				tableViewItensDeStock.setItems(observableListItensDeStock);
 
 				textFildTotalPedido.setText(String.format("%.2f€", stock.getValor()));
+				
 			} else {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setHeaderText("Problemas na escolha do Produto!");
@@ -185,6 +187,7 @@ public class ProcessoStockPedidoController implements Initializable {
 		}
 
 	}
+	
 
 	/** Validar a entrada de dados para o registo */
 	private boolean validarEntradaDeDados() {
@@ -196,10 +199,15 @@ public class ProcessoStockPedidoController implements Initializable {
 		if (dataPicker.getValue() == null) {
 			errorMessage += "Data invalida!\n";
 		}
+		if (comboBoxPedidoProduto.getSelectionModel().getSelectedItem() == null) {
+			errorMessage += "Produto invalido!\n";
+		}
+		if (textFildProdutoQuantidade.getText() == null || textFildProdutoQuantidade.getText().length() == 0) {
+			errorMessage += "Quantidade invalida!\n";
+		}
 		if (observableListItensDeStock == null) {
 			errorMessage += "Itens de Stock invalidos!\n";
 		}
-
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
