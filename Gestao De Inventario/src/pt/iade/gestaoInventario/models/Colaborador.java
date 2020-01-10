@@ -3,7 +3,6 @@ package pt.iade.gestaoInventario.models;
  * 
  * Classe de dados.
  *
- *@author Renato Simões
  */
 public class Colaborador {
 	private int idColaborador;
