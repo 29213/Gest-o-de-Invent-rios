@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="600.0" prefWidth="809.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iade.gestaoInventario.controllers.ProcessoPagamentoController">
+   <children>
+      <Pane prefHeight="485.0" prefWidth="675.0">
+         <children>
+            <Label fx:id="labelPagamentoColaborador" layoutX="22.0" layoutY="23.0" text="Colaborador" />
+            <ComboBox fx:id="comboboxPagamentoColaborador" onAction="#comboBoxAction"  layoutX="120.0" layoutY="19.0" prefWidth="150.0" />
+            <TabPane fx:id="tabpanePagamento" layoutX="22.0" layoutY="66.0" prefHeight="381.0" prefWidth="633.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="tabPagamentoPedidos" text="Pedidos">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="1050.0">
+                           <children>
+                              <TableView fx:id="tableviewPagamento" layoutX="12.0" layoutY="13.0" prefHeight="327.0" prefWidth="610.0">
+                                 <columns>
+                                    <TableColumn fx:id="tablecolumnPagamentoId" prefWidth="138.4000244140625" text="Pagamento" />
+                                    <TableColumn fx:id="tablecolumnPagamentoData" prefWidth="127.20001220703125" text="Data" />
+                                    <TableColumn fx:id="tablecolumnPagamentoValor" prefWidth="125.60003662109375" text="Valor" />
+                                    <TableColumn fx:id="tablecolumnPagamentoEstado" prefWidth="143.9999877929688" text="Estado" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="tabPagamentoAgregado" text="Agregado">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tableviewAgregado" layoutX="11.0" layoutY="12.0" prefHeight="245.0" prefWidth="532.0">
+                                 <columns>
+                                    <TableColumn fx:id="tablecolumnAgregadoCategoria" prefWidth="182.4000244140625" text="Categoria" />
+                                    <TableColumn fx:id="tablecolumnAgregadoQuantidade" prefWidth="173.5999755859375" text="Quantidade " />
+                                    <TableColumn fx:id="tablecolumnAgregadoValor" prefWidth="176.0" text="Valor" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+      <Button fx:id="buttonCancelarPedido" layoutX="22.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelarPagamento" prefHeight="49.0" prefWidth="150.0" text="Cancelar Pedido" />
+      <GridPane layoutX="444.0" layoutY="441.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Valor Total :" />
+            <Label fx:id="labelValorTotalPagamento" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
