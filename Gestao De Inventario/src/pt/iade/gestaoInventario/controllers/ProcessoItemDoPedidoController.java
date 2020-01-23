@@ -97,7 +97,7 @@ public class ProcessoItemDoPedidoController implements Initializable {
 	@FXML
 	private Button CancelarPedido;
 
-	/** Lista de colaboradores. */
+	/** Lista de colaboradores. */ 
 	private List<Colaborador> listColaboradores;
 
 	/** Lista de produtos. */
