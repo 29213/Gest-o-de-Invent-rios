@@ -176,7 +176,7 @@ public class ProcessoItemDoPedidoController implements Initializable {
 	/**
 	 * Define o pedido.
 	 *
-	 * @param solicita o novo pedido
+	 * @param pedido the new pedido
 	 */
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
@@ -260,7 +260,7 @@ public class ProcessoItemDoPedidoController implements Initializable {
 	/**
 	 * Botão cancelar pedido.
 	 *
-	 * @param fechar a janela.
+	 * @param event the event
 	 */
 	@FXML
 	void buttonCancelarPedido(ActionEvent event) {
