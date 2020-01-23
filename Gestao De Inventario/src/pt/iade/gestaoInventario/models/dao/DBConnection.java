@@ -19,19 +19,19 @@ public class DBConnection {
 	private static Connection connection = null;
 	
 	/** The Constant SERVIDOR. */
-	private static final String SERVIDOR = "localhost";
+	private static final String SERVIDOR = "remotemysql.com";
 	
 	/** The Constant PORTA. */
 	private static final String PORTA = "3306";
 	
 	/** The Constant BANCO_DE_DADOS. */
-	private static final String BANCO_DE_DADOS = "inventarios";
+	private static final String BANCO_DE_DADOS = "d4D2ggHp9g";
 	
 	/** The Constant UTILIZADOR. */
-	private static final String UTILIZADOR = "root";
+	private static final String UTILIZADOR = "d4D2ggHp9g";
 	
 	/** The Constant SENHA. */
-	private static final String SENHA = "";
+	private static final String SENHA = "8DdVYvtdDA";
 	
 	/** The Constant URL. */
 	private static final String URL = "jdbc:mysql://" + SERVIDOR + ":" + PORTA + "/" + BANCO_DE_DADOS + "?verifyServerCertificate=false&useSSL=true";
