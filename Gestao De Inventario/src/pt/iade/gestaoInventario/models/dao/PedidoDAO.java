@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import pt.iade.gestaoInventario.models.Colaborador;
 import pt.iade.gestaoInventario.models.ItemDoPedido;
+import pt.iade.gestaoInventario.models.Pagamento;
 import pt.iade.gestaoInventario.models.Pedido;
 
 // TODO: Auto-generated Javadoc
@@ -73,7 +74,7 @@ public class PedidoDAO {
 		}
 	}
 	
-	/*
+	
 	public boolean alterarPagamento(Pedido pedido) {
 		String sql = "UPDATE pedidos SET idPagamento=? WHERE idPedido=?";
 		Connection connection = DBConnection.conectar();
@@ -87,7 +88,7 @@ public class PedidoDAO {
 			Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
 			return false;
 		}
-	}*/
+	}
 
 	/**
 	 * Remover.
@@ -176,7 +177,7 @@ public class PedidoDAO {
 		}
 		return retorno;
 	}
-	/*
+	
 	public Pedido buscarPorPagamento(Pagamento pagamento) {
 		String sql = "SELECT * FROM pedidos WHERE idPagamento?";
 		Pedido retorno = new Pedido();
@@ -197,7 +198,7 @@ public class PedidoDAO {
 			Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return retorno;
-	}*/
+	}
 	
 	/**
 	 * Buscar ultimo pedido.
