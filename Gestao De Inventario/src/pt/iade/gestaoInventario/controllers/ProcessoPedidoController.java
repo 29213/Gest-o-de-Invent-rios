@@ -104,14 +104,8 @@ public class ProcessoPedidoController implements Initializable {
 
 	/** Atributos para manipulação da base de dados. */
 	private final ProdutoDAO produtoDAO = new ProdutoDAO();
-	
-	/** The item do pedido DAO. */
 	private final ItemDoPedidoDAO itemDoPedidoDAO = new ItemDoPedidoDAO();
-	
-	/** The pedido DAO. */
 	private final PedidoDAO pedidoDAO = new PedidoDAO();
-	
-	/** The pagamento DAO. */
 	private final PagamentoDAO pagamentoDAO = new PagamentoDAO();
 	/**
 	 * Initialize.
