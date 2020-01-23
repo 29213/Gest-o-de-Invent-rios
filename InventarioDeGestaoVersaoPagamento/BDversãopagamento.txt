@@ -1,0 +1,16 @@
+Base de Dados a usar na versão GestaoDeInventarios-versãopagamento
+
+https://remotemysql.com/phpmyadmin/sql.php?server=1&db=Sa09bvODzP&table=stocks&pos=0
+
+Username: Sa09bvODzP
+
+Database name: Sa09bvODzP
+
+Password: RYE1S1DYh4
+
+Server: remotemysql.com
+
+Port: 3306
+
+(tabelas usadas newitensdestocks, stocks)
+(tabelas sem efeito itensdestock, oldStocks)
