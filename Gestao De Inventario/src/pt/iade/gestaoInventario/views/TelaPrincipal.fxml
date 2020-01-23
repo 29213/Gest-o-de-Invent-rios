@@ -19,7 +19,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Processo">
             <items>
-              <MenuItem fx:id="menuItemProcessoEstoque" mnemonicParsing="false" onAction="#handleMenuItemProcessoEstoque" text="Pedido" />
+              <MenuItem fx:id="menuItemProcessoPedido" mnemonicParsing="false" onAction="#handleMenuItemProcessoPedido" text="Pedido" />
+                  <MenuItem fx:id="menuItemProcessoPagamento" mnemonicParsing="false" onAction="#handleMenuItemProcessoPagamento" text="Pagamento" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Relatório">

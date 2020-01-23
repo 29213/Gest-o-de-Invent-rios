@@ -4,21 +4,30 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pt.iade.gestaoInventario.models.Categoria;
 import pt.iade.gestaoInventario.models.Produto;
 
+// TODO: Auto-generated Javadoc
 /**
  * 
- * Esta classe permiter ter interação com a base de dados.
- *
+ * <p> Esta classe permite ter interação com a base de dados.
+ * <p> Permite: Inserir, alterar, remover, listar, listar por categoria e buscar.
+ * 
+ *  @author Renato Pitta Simões
  */
 	public class ProdutoDAO {
 
+	/**
+	 * Inserir.
+	 *
+	 * @param produto o produto
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean inserir(Produto produto) {
 		String sql = "INSERT INTO produtos(nome, preco, quantidade, idCategoria) VALUES(?,?,?,?)";
 		Connection connection = DBConnection.conectar();
@@ -36,6 +45,12 @@ import pt.iade.gestaoInventario.models.Produto;
 		}
 	}
 
+	/**
+	 * Alterar.
+	 *
+	 * @param produto o produto
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean alterar(Produto produto) {
 		String sql = "UPDATE produtos SET nome=?, preco=?, quantidade=?, idCategoria=? WHERE idProduto=?";
 		Connection connection = DBConnection.conectar();
@@ -54,6 +69,12 @@ import pt.iade.gestaoInventario.models.Produto;
 		}
 	}
 
+	/**
+	 * Remover.
+	 *
+	 * @param produto o produto
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean remover(Produto produto) {
 		String sql = "DELETE FROM produtos WHERE idColaborador=?";
 		Connection connection = DBConnection.conectar();
@@ -68,9 +89,14 @@ import pt.iade.gestaoInventario.models.Produto;
 		}
 	}
 
-	public List<Produto> listar() {
+	/**
+	 * Listar.
+	 *
+	 * @return a lista observável
+	 */
+	public ObservableList<Produto> listar() {
 		String sql = "SELECT * FROM produtos";
-		List<Produto> retorno = new ArrayList<>();
+		ObservableList<Produto> retorno = FXCollections.observableArrayList();
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -97,9 +123,15 @@ import pt.iade.gestaoInventario.models.Produto;
 		return retorno;
 	}
 
-	public List<Produto> listarPorCategoria(Categoria categoria) {
+	/**
+	 * Listar por categoria.
+	 *
+	 * @param categoria a categoria
+	 * @return a lista observável 
+	 */
+	public static ObservableList<Produto> listarPorCategoria(Categoria categoria) {
 		String sql = "SELECT * FROM produtos WHERE idCategoria=?";
-		List<Produto> retorno = new ArrayList<>();
+		ObservableList<Produto> retorno = FXCollections.observableArrayList();
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -121,6 +153,12 @@ import pt.iade.gestaoInventario.models.Produto;
 		return retorno;
 	}
 
+	/**
+	 * Buscar.
+	 *
+	 * @param produto o produto
+	 * @return o produto
+	 */
 	public Produto buscar(Produto produto) {
 		String sql = "SELECT * FROM produtos WHERE idProduto=?";
 		Produto retorno = new Produto();

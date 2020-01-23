@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="160.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pt.iade.gestaoInventario.controllers.ProcessoPagamentoDataController">
+   <children>
+      <DatePicker fx:id="datepickerDataPagamento" layoutX="145.0" layoutY="38.0" promptText="Escolher a data" />
+      <Label fx:id="labelDataPagamento" layoutX="20.0" layoutY="42.0" text="Data de Pagamento" />
+      <Button fx:id="buttonCancelarPagamento" layoutX="249.0" layoutY="116.0" mnemonicParsing="false" onAction="#buttonCancelarPagamento" prefHeight="26.0" prefWidth="69.0" text="Camcelar" />
+      <Button fx:id="datepickerDataPagamento" layoutX="145.0" layoutY="117.0" mnemonicParsing="false" onAction="#buttonConfirmarPagamento" text="Confirmar" />
+   </children>
+</AnchorPane>

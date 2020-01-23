@@ -4,19 +4,29 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import pt.iade.gestaoInventario.models.Categoria;
 
+// TODO: Auto-generated Javadoc
 /**
  * 
- * Esta classe perminte ter interação com a base de dados.
- *
+ * <p>Esta classe perminte ter interação com a base de dados.
+ * <p> Perminte: Inserir, alterar, remover, listar e buscar 
+ * 
+ * @author Renato Pitta Simões
  */
 public class CategoriaDAO {
+	
+	/**
+	 * Inserir.
+	 *
+	 * @param categoria a categoria
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean inserir(Categoria categoria) {
 		String sql = "INSERT INTO categorias(descricao) VALUES(?)";
 		Connection connection = DBConnection.conectar();
@@ -31,6 +41,12 @@ public class CategoriaDAO {
 		}
 	}
 
+	/**
+	 * Alterar.
+	 *
+	 * @param categoria a categoria
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean alterar(Categoria categoria) {
 		String sql = "UPDATE categorias SET descricao=? WHERE idCategoria=?";
 		Connection connection = DBConnection.conectar();
@@ -46,6 +62,12 @@ public class CategoriaDAO {
 		}
 	}
 
+	/**
+	 * Remover.
+	 *
+	 * @param categoria a categoria
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean remover(Categoria categoria) {
 		String sql = "DELETE FROM categorias WHERE idCategoria=?";
 		Connection connection = DBConnection.conectar();
@@ -60,11 +82,16 @@ public class CategoriaDAO {
 		}
 	}
 
-	public List<Categoria> listar() {
+	/**
+	 * Listar.
+	 *
+	 * @return a lista
+	 */
+	public ObservableList<Categoria> listar() {
 		String sql = "SELECT * FROM categorias";
 		Connection connection = DBConnection.conectar();
 
-		List<Categoria> retorno = new ArrayList<>();
+		ObservableList<Categoria> retorno = FXCollections.observableArrayList();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			ResultSet resultado = stmt.executeQuery();
@@ -80,6 +107,12 @@ public class CategoriaDAO {
 		return retorno;
 	}
 
+	/**
+	 * Buscar.
+	 *
+	 * @param categoria a categoria
+	 * @return a categoria
+	 */
 	public Categoria buscar(Categoria categoria) {
 		String sql = "SELECT * FROM categorias WHERE idCategoria=?";
 		Categoria retorno = new Categoria();

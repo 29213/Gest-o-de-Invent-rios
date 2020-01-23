@@ -15,15 +15,24 @@ import pt.iade.gestaoInventario.models.Colaborador;
 import pt.iade.gestaoInventario.models.ItemDoPedido;
 import pt.iade.gestaoInventario.models.Pedido;
 
+// TODO: Auto-generated Javadoc
 /**
  * 
- * Esta classe permite ter interação com a base de dados.
- *
+ * <p> Esta classe permite ter interação com a base de dados.
+ * <p> Permite: Inserir, alterar, remover, listar, buscar e buscar o ultimo pedido.
+ * 
+ * @author Renato Pitta Simões
  */
 public class PedidoDAO {
 
+	/**
+	 * Inserir.
+	 *
+	 * @param pedido o pedido
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean inserir(Pedido pedido) {
-		String sql = "INSERT INTO stocks(data, valor, idColaborador) VALUES(?,?,?)";
+		String sql = "INSERT INTO pedidos(data, valor, idColaborador) VALUES(?,?,?)";
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -33,7 +42,7 @@ public class PedidoDAO {
 			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next())
-				pedido.setIdStock(rs.getInt(1));
+				pedido.setIdPedido(rs.getInt(1));
 			return true;
 		} catch (SQLException ex) {
 			Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -41,15 +50,21 @@ public class PedidoDAO {
 		}
 	}
 
+	/**
+	 * Alterar.
+	 *
+	 * @param pedido o pedido
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean alterar(Pedido pedido) {
-		String sql = "UPDATE stokcs SET data=?, valor=?, idColaborador=? WHERE idStock=?";
+		String sql = "UPDATE pedidos SET data=?, valor=?, idColaborador=? WHERE idPedido=?";
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setDate(1, Date.valueOf(pedido.getData()));
 			stmt.setDouble(2, pedido.getValor());
 			stmt.setInt(3, pedido.getColaborador().getIdColaborador());
-			stmt.setInt(4, pedido.getIdStock());
+			stmt.setInt(4, pedido.getIdPedido());
 			stmt.execute();
 			return true;
 		} catch (SQLException ex) {
@@ -57,13 +72,35 @@ public class PedidoDAO {
 			return false;
 		}
 	}
-
-	public boolean remover(Pedido pedido) {
-		String sql = "DELETE FROM stocks WHERE idStock=?";
+	
+	/*
+	public boolean alterarPagamento(Pedido pedido) {
+		String sql = "UPDATE pedidos SET idPagamento=? WHERE idPedido=?";
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setInt(1, pedido.getIdStock());
+			stmt.setInt(1, pedido.getPagamento().getIdPagamento());
+			stmt.setInt(2, pedido.getIdPedido());
+			stmt.execute();
+			return true;
+		} catch (SQLException ex) {
+			Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+			return false;
+		}
+	}*/
+
+	/**
+	 * Remover.
+	 *
+	 * @param pedido o pedido
+	 * @return verdadeiro, se for bem sucedido
+	 */
+	public boolean remover(Pedido pedido) {
+		String sql = "DELETE FROM pedidos WHERE idPedido=?";
+		Connection connection = DBConnection.conectar();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setInt(1, pedido.getIdPedido());
 			stmt.execute();
 			return true;
 		} catch (SQLException ex) {
@@ -72,8 +109,13 @@ public class PedidoDAO {
 		}
 	}
 
+	/**
+	 * Listar.
+	 *
+	 * @return a lista observável do pedido
+	 */
 	public ObservableList<Pedido> listar() {
-		String sql = "SELECT * FROM stocks";
+		String sql = "SELECT * FROM pedidos";
 		Connection connection = DBConnection.conectar();
 		ObservableList<Pedido> retorno = FXCollections.observableArrayList();
 		try {
@@ -82,9 +124,9 @@ public class PedidoDAO {
 			while (resultado.next()) {
 				Pedido pedido = new Pedido();
 				Colaborador colaborador = new Colaborador();
-				ObservableList<ItemDoPedido> itensDeStock = FXCollections.observableArrayList();
+				ObservableList<ItemDoPedido> itensDoPedido = FXCollections.observableArrayList();
 
-				pedido.setIdStock(resultado.getInt("idStock"));
+				pedido.setIdPedido(resultado.getInt("idPedido"));
 				pedido.setData(resultado.getDate("data").toLocalDate());
 				pedido.setValor(resultado.getDouble("valor"));
 				colaborador.setIdColaborador(resultado.getInt("idColaborador"));
@@ -94,10 +136,10 @@ public class PedidoDAO {
 				colaborador = colaboradorDAO.buscar(colaborador);
 
 				new ItemDoPedidoDAO();
-				itensDeStock = ItemDoPedidoDAO.listarPorStock(pedido);
+				itensDoPedido = ItemDoPedidoDAO.listarPorPedido(pedido);
 
 				pedido.setColaborador(colaborador);
-				pedido.setItensDeStock(itensDeStock);
+				pedido.setItensDoPedido(itensDoPedido);
 				retorno.add(pedido);
 			}
 		} catch (SQLException ex) {
@@ -106,17 +148,23 @@ public class PedidoDAO {
 		return retorno;
 	}
 
+	/**
+	 * Buscar.
+	 *
+	 * @param pedido o pedido
+	 * @return o pedido
+	 */
 	public Pedido buscar(Pedido pedido) {
-		String sql = "SELECT * FROM stocks WHERE idStock=?";
+		String sql = "SELECT * FROM pedidos WHERE idPedido=?";
 		Pedido retorno = new Pedido();
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setInt(1, pedido.getIdStock());
+			stmt.setInt(1, pedido.getIdPedido());
 			ResultSet resultado = stmt.executeQuery();
 			if (resultado.next()) {
 				Colaborador colaborador = new Colaborador();
-				pedido.setIdStock(resultado.getInt("idStock"));
+				pedido.setIdPedido(resultado.getInt("idPedido"));
 				pedido.setData(resultado.getDate("data").toLocalDate());
 				pedido.setValor(resultado.getDouble("valor"));
 				colaborador.setIdColaborador(resultado.getInt("idColaborador"));
@@ -128,9 +176,36 @@ public class PedidoDAO {
 		}
 		return retorno;
 	}
-
-	public Pedido buscarUltimoStock() {
-		String sql = "SELECT max(idStock) FROM stocks";
+	/*
+	public Pedido buscarPorPagamento(Pagamento pagamento) {
+		String sql = "SELECT * FROM pedidos WHERE idPagamento?";
+		Pedido retorno = new Pedido();
+		Connection connection = DBConnection.conectar();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setInt(1, pagamento.getIdPagamento());
+			ResultSet resultado = stmt.executeQuery();
+			if (resultado.next()) {
+				Colaborador colaborador = new Colaborador();
+				retorno.setIdPedido(resultado.getInt("idPedido"));
+				retorno.setData(resultado.getDate("data").toLocalDate());
+				retorno.setValor(resultado.getDouble("valor"));
+				colaborador.setIdColaborador(resultado.getInt("idColaborador"));
+				retorno.setColaborador(colaborador);
+			}
+		} catch (SQLException ex) {
+			Logger.getLogger(PedidoDAO.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return retorno;
+	}*/
+	
+	/**
+	 * Buscar ultimo pedido.
+	 *
+	 * @return o pedido
+	 */
+	public Pedido buscarUltimoPedido() {
+		String sql = "SELECT max(idPedido) FROM pedidos";
 		Pedido retorno = new Pedido();
 		Connection connection = DBConnection.conectar();
 		try {
@@ -138,7 +213,7 @@ public class PedidoDAO {
 			ResultSet resultado = stmt.executeQuery();
 
 			if (resultado.next()) {
-				retorno.setIdStock(resultado.getInt(1));
+				retorno.setIdPedido(resultado.getInt(1));
 				return retorno;
 			}
 		} catch (SQLException ex) {
@@ -146,5 +221,4 @@ public class PedidoDAO {
 		}
 		return retorno;
 	}
-
 }

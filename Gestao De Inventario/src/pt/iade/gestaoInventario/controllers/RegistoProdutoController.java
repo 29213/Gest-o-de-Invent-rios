@@ -27,69 +27,96 @@ import javafx.util.converter.IntegerStringConverter;
 import pt.iade.gestaoInventario.models.Categoria;
 import pt.iade.gestaoInventario.models.Produto;
 import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
+// TODO: Auto-generated Javadoc
 /**
-* Controlador da interface principal, registo de Produtos.
-* Permite visualizar os produtos registados, numa TableView.
-* Permite escolher um produto e:
-*    <li> Visualizar as informações do produto ao lado;
+* <p> Controlador da interface principal, registo de Produtos.
+* <p> Permite visualizar os produtos registados, numa TableView.
+* <p> Permite escolher um produto e:
+*     <li> Visualizar as informações do produto ao lado;
 *	  <li> Alterar os dados do produto abrindo uma nova janela, chama o controlador {@link RegistoProdutoStageController};
 *	  <li> Editar o nome e a quantidade do produto escolhido na tableView.
-*Permite adicionar um coladorador abrindo uma nova janela, chama o contralador {@link RegistoProdutoStageController}.
+* <p> Permite adicionar um coladorador abrindo uma nova janela, chama o contralador {@link RegistoProdutoStageController}.
+*
+*@author Renato Pitta Simões
 *
 **/
 	public class RegistoProdutoController implements Initializable {
 
+	/** O painel de âncora. */
 	@FXML
 	private AnchorPane anchorPane;
 
+	/** A tabela de produtos. */
 	@FXML
 	private TableView<Produto> tableViewProdutos;
 
+	/** A coluna da table produto nome. */
 	@FXML
 	private TableColumn<Produto, String> tableColumnProdutoNome;
 
+	/** A coluna da tabela produto quantidade. */
 	@FXML
 	private TableColumn<Produto, Integer> tableColumnProdutoQuantidade;
 
+	/** O campo de texto do produto nome. */
 	@FXML
 	private TextField TextFieldProdutoNome;
 
+	/** O campo de texto do produto preco. */
 	@FXML
 	private TextField TextFieldProdutoPreco;
 
+	/** O campo de texto do produto quantidade. */
 	@FXML
 	private TextField TextFieldProdutoQuantidade;
 
+	/** O combobox da categoria. */
 	@FXML
 	private ComboBox<Categoria> comboBoxCategoria;
 
+	/** A lable produto nome. */
 	@FXML
 	private Label lableProdutoNome;
 
+	/** A lable produto preco. */
 	@FXML
 	private Label lableProdutoPreco;
 
+	/** A lable produto quantidade. */
 	@FXML
 	private Label lableProdutoQuantidade;
 
+	/** A lable produto categoria. */
 	@FXML
 	private Label lableProdutoCategoria;
 
+	/** A lable produto codigo. */
 	@FXML
 	private Label lableProdutoCodigo;
 
+	/** Lista de produtos. */
 	private List<Produto> listProdutos;
 
+	/** lista observável dos produtos. */
 	private ObservableList<Produto> observableListProdutos;
 
+	/** Atributo para manipulação da base de dados. */
 	private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
+	/** Botão alterar. */
 	@FXML
 	private Button buttonAlterar;
 
+	/** Botão adicionar. */
 	@FXML
 	private Button buttonAdicionar;
 
+	/**
+	 * Initializa.
+	 *
+	 * @param url the url
+	 * @param rb the rb
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
@@ -107,6 +134,12 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
 	}
 
+	/**
+	 * Adicionar produto na base de dados e carregar na tabela.
+	 *
+	 * @param event the event
+	 * @throws IOException sinaliza que ocorreu uma exceção de E / S.
+	 */
 	@FXML
 	void AdicionarProduto(ActionEvent event) throws IOException {
 		Produto produto = new Produto();
@@ -117,6 +150,12 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 		}
 	}
 
+	/**
+	 * Alterar produto, guardar na base de dados e carregar na tabela.
+	 *
+	 * @param event the event
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@FXML
 	void AlterarProduto(ActionEvent event) throws IOException {
 		tableViewProdutos.getItems();
@@ -134,6 +173,9 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 		}
 	}
 
+	/**
+	 * Carregar table view produtos.
+	 */
 	private void carregarTableViewProdutos() {
 
 		tableColumnProdutoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -146,6 +188,11 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
 	}
 
+	/**
+	 * Selecionar item tabela produto e apresentar os detablhes.
+	 *
+	 * @param produto the produto
+	 */
 	private void selecionarItemTableViewProduto(Produto produto) {
 		if (produto != null) {
 			lableProdutoCodigo.setText(String.valueOf(produto.getIdProduto()));
@@ -162,6 +209,13 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 		}
 	}
 
+	/**
+	 * Mostrar registo produto stage.
+	 *
+	 * @param produto the produto
+	 * @return verdadeiro, se for bem sucedido
+	 * @throws IOException Sinaliza que ocorreu uma exceção de E / S.
+	 */
 	public boolean showRegistoProdutoStage(Produto produto) throws IOException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(RegistoColaboradorStageController.class
@@ -170,7 +224,7 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
 		/** Criando um tela de registo (ProdutoStage) */
 		Stage produtoStage = new Stage();
-		produtoStage.setTitle("Registar Produtos");
+		produtoStage.setTitle("Produto");
 		Scene scene = new Scene(janela);
 		produtoStage.setScene(scene);
 
@@ -186,6 +240,12 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
 	}
 
+	/**
+	 * Editar o nome do produto escolhodo na tabela e guardar na base de dados a alteração.
+	 *
+	 * @param ProdutoStringCellEditEvent the produto string cell edit event
+	 * @throws IOException Sinaliza que ocorreu uma exceção de E / S.
+	 */
 	@FXML
 	void onEditNome(TableColumn.CellEditEvent<Produto, String> ProdutoStringCellEditEvent) throws IOException {
 		tableViewProdutos.setItems(observableListProdutos);
@@ -195,11 +255,17 @@ import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
 	}
 
+	/**
+	 * Editar a quantidade do produto escolhido na tabela e guardar na base de dados a alteração.
+	 *
+	 * @param ProdutoIntegerCellEditEvent the produto integer cell edit event
+	 * @throws IOException Sinaliza que ocorreu uma exceção de E / S.
+	 */
 	@FXML
-	void onEditQuantidade(TableColumn.CellEditEvent<Produto, Integer> ProdutoIngegerCellEditEvent) throws IOException {
+	void onEditQuantidade(TableColumn.CellEditEvent<Produto, Integer> ProdutoIntegerCellEditEvent) throws IOException {
 		tableViewProdutos.setItems(observableListProdutos);
 		Produto produto = tableViewProdutos.getSelectionModel().getSelectedItem();
-		produto.setQuantidade(ProdutoIngegerCellEditEvent.getNewValue());
+		produto.setQuantidade(ProdutoIntegerCellEditEvent.getNewValue());
 		produtoDAO.alterar(produto);
 
 	}

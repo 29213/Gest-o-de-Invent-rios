@@ -4,19 +4,30 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import pt.iade.gestaoInventario.models.Colaborador;
+// TODO: Auto-generated Javadoc
 /**
  * 
- * Esta classe permite ter interação com a base de dados.
+ * <p> Esta classe permite ter interação com a base de dados.
+ * <p> Permite: Inserir, alterar, remover, listar e buscar.
  *
+ * @author Renato Pitta Simões
  */
 
 public class ColaboradorDAO {
+	
+	/**
+	 * Inserir.
+	 *
+	 * @param colaborador o colaborador
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean inserir(Colaborador colaborador) {
 		String sql = "INSERT INTO colaboradores (nome, numero, telefone) VALUES(?,?,?)";
 		Connection connection = DBConnection.conectar();
@@ -33,6 +44,12 @@ public class ColaboradorDAO {
 		}
 	}
 
+	/**
+	 * Alterar.
+	 *
+	 * @param colaborador o colaborador
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean alterar(Colaborador colaborador) {
 		String sql = "UPDATE colaboradores SET nome=?, numero=?, telefone=? WHERE idColaborador=?";
 		Connection connection = DBConnection.conectar();
@@ -50,6 +67,12 @@ public class ColaboradorDAO {
 		}
 	}
 
+	/**
+	 * Remover.
+	 *
+	 * @param colaborador o colaborador
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	public boolean remover(Colaborador colaborador) {
 		String sql = "DELETE FROM colaboradores WHERE idColaborador=?";
 		Connection connection = DBConnection.conectar();
@@ -64,10 +87,15 @@ public class ColaboradorDAO {
 		}
 	}
 
+	/**
+	 * Listar.
+	 *
+	 * @return a lista observável
+	 */
 	@FXML
-	public List<Colaborador> listar() {
+	public ObservableList<Colaborador> listar() {
 		String sql = "SELECT * FROM colaboradores";
-		List<Colaborador> retorno = new ArrayList<>();
+		ObservableList<Colaborador> retorno = FXCollections.observableArrayList();
 		Connection connection = DBConnection.conectar();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -86,6 +114,12 @@ public class ColaboradorDAO {
 		return retorno;
 	}
 
+	/**
+	 * Buscar.
+	 *
+	 * @param colaborador o colaborador
+	 * @return o colaborador
+	 */
 	public Colaborador buscar(Colaborador colaborador) {
 		String sql = "SELECT * FROM colaboradores WHERE idColaborador=?";
 		Colaborador retorno = new Colaborador();

@@ -25,83 +25,128 @@ import pt.iade.gestaoInventario.models.Pedido;
 import pt.iade.gestaoInventario.models.dao.ColaboradorDAO;
 import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
+// TODO: Auto-generated Javadoc
 /**
  * 
  * Controlador da interface do registo dos itens do pedido.
- *  Permite selecionar o colaborador apartir de uma Combobox.
- *  Permite selecionar uma data.
- *  Permite selecionar os produtos e:
- *  <li> Adicionar as quantidadades desejadas.
- *  <li> Visualizar as informações dos produtos numa tableView.
- * Permite confirmar o registo dos itens de pedido, fechar a janela e gera o pedido.
+ * <p>
+ * Permite selecionar o colaborador apartir de uma Combobox.
+ * <p>
+ * Permite selecionar uma data.
+ * <p>
+ * Permite selecionar os produtos e:
+ * <p>
+ * Adicionar as quantidadades desejadas.
+ * <p>
+ * Visualizar as informações dos produtos numa tableView.
+ * <p>
+ * Permite confirmar o registo dos itens de pedido, fechar a janela e gera o
+ * pedido.
+ * <p>
  * Permite cancelar o registo de itens de pedido e fecha a janela.
- *  
- *  @author Renato Pitta Simões
+ * 
+ * @author Renato Pitta Simões
  */
 public class ProcessoItemDoPedidoController implements Initializable {
+
+	/** O combobox pedido colaborador. */
 	@FXML
 	private ComboBox<Colaborador> comboBoxPedidoColaborador;
 
+	/** O selecionador de data. */
 	@FXML
 	private DatePicker dataPicker;
 
+	/** O combobox pedido produto. */
 	@FXML
 	private ComboBox<Produto> comboBoxPedidoProduto;
 
+	/** O campo de texto produto quantidade. */
 	@FXML
 	private TextField textFildProdutoQuantidade;
 
+	/** O botão adicionar. */
 	@FXML
 	private Button buttanAdicionar;
 
+	/** A tabela exibe itens do pedido. */
 	@FXML
-	private TableView<ItemDoPedido> tableViewItensDeStock;
+	private TableView<ItemDoPedido> tableViewItensDoPedido;
 
+	/** A coluna da tabela produto. */
 	@FXML
-	private TableColumn<ItemDoPedido, Produto> TableColumnItemStockProduto;
+	private TableColumn<ItemDoPedido, Produto> TableColumnItemPedidoProduto;
 
+	/** A coluna Tabela quantidade. */
 	@FXML
-	private TableColumn<ItemDoPedido, Integer> TableColumnItemStockQuantidade;
+	private TableColumn<ItemDoPedido, Integer> TableColumnItemPedidoQuantidade;
 
+	/** A coluna da Tabela valor. */
 	@FXML
-	private TableColumn<ItemDoPedido, Double> TableColumnItemStockValor;
+	private TableColumn<ItemDoPedido, Double> TableColumnItemPedidoValor;
 
+	/** O campo de texto total do pedido. */
 	@FXML
 	private TextField textFildTotalPedido;
 
+	/** O botão confirmar click S. */
 	@FXML
 	private boolean buttonConfirmarClickS;
 
+	/** O botão Cancelar pedido. */
 	@FXML
 	private Button CancelarPedido;
 
+	/** Lista de colaboradores. */
 	private List<Colaborador> listColaboradores;
 
+	/** Lista de produtos. */
 	private List<Produto> listProdutos;
 
+	/** lista observável dos colaboradores. */
 	private ObservableList<Colaborador> observableListColaboradores;
 
+	/** lista observável dos produtos. */
 	private ObservableList<Produto> observableListProdutos;
 
-	private ObservableList<ItemDoPedido> observableListItensDeStock;
+	/** A lista observável dos itens do pedido. */
+	private ObservableList<ItemDoPedido> observableListItensDoPedido;
 
+	/** Atributos para manipulação da base de dados. */
 	private final ColaboradorDAO colaboradorDAO = new ColaboradorDAO();
+
+	/** Atributos para manipulação da base de dados. */
 	private final ProdutoDAO produtoDAO = new ProdutoDAO();
+
+	/** O Pedido stage. */
 	private Stage PedidoStage;
+
+	/** O botão confirmar clique. */
 	private boolean buttonConfirmarClick = false;
+
+	/** O pedido. */
 	private Pedido pedido;
 
+	/**
+	 * Initializa.
+	 *
+	 * @param url the url
+	 * @param rb  the rb
+	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		carregarComboBoxColaboradores();
 		carregarComboxProdutos();
 
-		TableColumnItemStockProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
-		TableColumnItemStockQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-		TableColumnItemStockValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
+		TableColumnItemPedidoProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
+		TableColumnItemPedidoQuantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+		TableColumnItemPedidoValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
 
 	}
 
+	/**
+	 * Carregar combobox colaboradores.
+	 */
 	public void carregarComboBoxColaboradores() {
 
 		listColaboradores = colaboradorDAO.listar();
@@ -110,44 +155,84 @@ public class ProcessoItemDoPedidoController implements Initializable {
 		comboBoxPedidoColaborador.setItems(observableListColaboradores);
 	}
 
+	/**
+	 * Carregar combobox produtos.
+	 */
 	public void carregarComboxProdutos() {
 		listProdutos = produtoDAO.listar();
 		observableListProdutos = FXCollections.observableArrayList(listProdutos);
 		comboBoxPedidoProduto.setItems(observableListProdutos);
 	}
 
-	public Pedido getStock() {
+	/**
+	 * Obetem o pedido.
+	 *
+	 * @return o pedido
+	 */
+	public Pedido getPedido() {
 		return pedido;
 	}
 
-	public void setStock(Pedido pedido) {
+	/**
+	 * Define o pedido.
+	 *
+	 * @param solicita o novo pedido
+	 */
+	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
 
+	/**
+	 * Obtem o Pedido Stage.
+	 *
+	 * @return o Pedido Stage.
+	 */
 	public Stage getPedidoStage() {
 		return PedidoStage;
 	}
 
+	/**
+	 * Define Pedido stage.
+	 *
+	 * @param pedidoStage o novo Pedido Stage.
+	 */
 	public void setPedidoStage(Stage pedidoStage) {
 		PedidoStage = pedidoStage;
 	}
 
+	/**
+	 * Verifica se o botão confirma click.
+	 *
+	 * @return verdade, se for o botão confirmar click
+	 */
 	public boolean isButtonConfirmarClick() {
 		return buttonConfirmarClick;
 	}
 
+	/**
+	 * Define o botão confirmar clique.
+	 *
+	 * @param buttonConfirmarClick o novo botão confirmar click
+	 */
 	public void setButtonConfirmarClick(boolean buttonConfirmarClick) {
 		this.buttonConfirmarClick = buttonConfirmarClick;
 	}
 
+	/**
+	 * Botão adicionar quantidade.
+	 *
+	 * @param event the event
+	 * @throws IOException Sinais de que ocorreu uma exceção de E / S.
+	 */
 	@FXML
-	void buttonAdiconarQuantidade(ActionEvent event) throws IOException {
-		
+	void buttonAdicionarQuantidade(ActionEvent event) throws IOException {
+
 		Produto produto;
 		ItemDoPedido itemDoPedido = new ItemDoPedido();
-		itemDoPedido.setStock(pedido);
+		itemDoPedido.setPedido(pedido);
 
 		if (comboBoxPedidoProduto.getSelectionModel().getSelectedItem() != null) {
+			
 			produto = (Produto) comboBoxPedidoProduto.getSelectionModel().getSelectedItem();
 
 			if (produto.getQuantidade() >= Integer.parseInt(textFildProdutoQuantidade.getText())) {
@@ -155,28 +240,39 @@ public class ProcessoItemDoPedidoController implements Initializable {
 				itemDoPedido.setQuantidade(Integer.parseInt(textFildProdutoQuantidade.getText()));
 				itemDoPedido.setValor(itemDoPedido.getProduto().getPreco() * itemDoPedido.getQuantidade());
 
-				pedido.getItensDeStock().add(itemDoPedido);
+				pedido.getItensDoPedido().add(itemDoPedido);
 				pedido.setValor(pedido.getValor() + itemDoPedido.getValor());
 
-				observableListItensDeStock = FXCollections.observableArrayList(pedido.getItensDeStock());
-				tableViewItensDeStock.setItems(observableListItensDeStock);
+				observableListItensDoPedido = FXCollections.observableArrayList(pedido.getItensDoPedido());
+				tableViewItensDoPedido.setItems(observableListItensDoPedido);
 
 				textFildTotalPedido.setText(String.format("%.2f€", pedido.getValor()));
-				
+
 			} else {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setHeaderText("Problemas na escolha do Produto!");
-				alert.setContentText("Quantidade indisponivel no pedido!");
+				alert.setContentText("Quantidade indisponivel!");
 				alert.show();
 			}
 		}
 	}
 
+	/**
+	 * Botão cancelar pedido.
+	 *
+	 * @param fechar a janela.
+	 */
 	@FXML
 	void buttonCancelarPedido(ActionEvent event) {
 		getPedidoStage().close();
 	}
 
+	/**
+	 * Botão confirmar pedido.
+	 *
+	 * @param event the event
+	 * @throws IOException Sinais de que ocorreu uma exceção de E / S.
+	 */
 	@FXML
 	void buttonConfirmarPedido(ActionEvent event) throws IOException {
 		if (validarEntradaDeDados()) {
@@ -188,9 +284,12 @@ public class ProcessoItemDoPedidoController implements Initializable {
 		}
 
 	}
-	
 
-	/** Validar a entrada de dados para o registo */
+	/**
+	 * Validar a entrada de dados para o registo.
+	 *
+	 * @return verdadeiro, se for bem sucedido.
+	 */
 	private boolean validarEntradaDeDados() {
 		String errorMessage = "";
 
@@ -206,7 +305,7 @@ public class ProcessoItemDoPedidoController implements Initializable {
 		if (textFildProdutoQuantidade.getText() == null || textFildProdutoQuantidade.getText().length() == 0) {
 			errorMessage += "Quantidade invalida!\n";
 		}
-		if (observableListItensDeStock == null) {
+		if (observableListItensDoPedido == null) {
 			errorMessage += "Itens de Pedido invalidos!\n";
 		}
 		if (errorMessage.length() == 0) {

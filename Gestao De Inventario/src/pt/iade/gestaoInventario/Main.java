@@ -7,7 +7,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Main.
+ */
 public class Main extends Application {
+	
+	/**
+	 * Start.
+	 *
+	 * @param primaryStage the primary stage
+	 * @throws Exception the exception
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
@@ -23,6 +34,11 @@ public class Main extends Application {
 		
 	}
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

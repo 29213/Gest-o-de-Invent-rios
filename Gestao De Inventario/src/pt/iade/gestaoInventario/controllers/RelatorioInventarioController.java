@@ -15,39 +15,59 @@ import pt.iade.gestaoInventario.models.Categoria;
 import pt.iade.gestaoInventario.models.Produto;
 import pt.iade.gestaoInventario.models.dao.ProdutoDAO;
 
+// TODO: Auto-generated Javadoc
 /**
- * Controlador da interface principal, relatorio de inventario
- * Permite visualizar todos os produtos registados numa TableView.
+ * <p> Controlador da interface principal, relatorio de inventario
+ * <p> Permite visualizar todos os produtos registados numa Tabela.
  *
+ * @author Renato Pitta Simões
  */
 public class RelatorioInventarioController implements Initializable {
-	 @FXML
+	 
+ 	/** Tabela de inventario. */
+ 	@FXML
 	    private TableView<Produto> tableViewInventario;
 
-	    @FXML
+	    /** A coluna da tabela produto codigo. */
+    	@FXML
 	    private TableColumn<Produto, Integer> tableColumnProdutoCodigo;
 
-	    @FXML
+	    /** A coluna da tabela produto nome. */
+    	@FXML
 	    private TableColumn<Produto, String> tableColumnProdutoNome;
 
-	    @FXML
+	    /** A coluna da tabela produto quantidade. */
+    	@FXML
 	    private TableColumn<Produto, Integer> tableColumnProdutoQuantidade;
 
-	    @FXML
+	    /** A coluna da tabela produto categoria. */
+    	@FXML
 	    private TableColumn<Categoria, String> tableColumnProdutoCategoria;
 	    
-	    private List<Produto> listProdutos;
+	    /** Lista de produtos. */
+    	private List<Produto> listProdutos;
 	    
-	    private ObservableList<Produto> obserbableProdutos;
+	    /** Lista observáveis de produtos. */
+    	private ObservableList<Produto> observableListProdutos;
 	    
-	    private final ProdutoDAO produtoDAO = new ProdutoDAO();
+	    /** Atributo para manipulação da base de dados. */
+    	private final ProdutoDAO produtoDAO = new ProdutoDAO();
 
+		/**
+		 * Inicializar.
+		 *
+		 * @param location the location
+		 * @param resources the resources
+		 */
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			carregarTableViewProdutos();
 			
 		}
-	    /** Configuração da tableView*/
+	    
+    	/**
+    	 *  Carregar tabela de produtos.
+    	 */
 		public void carregarTableViewProdutos() {
 			tableColumnProdutoCodigo.setCellValueFactory(new PropertyValueFactory<>("idProduto"));
 			tableColumnProdutoNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -56,8 +76,8 @@ public class RelatorioInventarioController implements Initializable {
 			
 			listProdutos = produtoDAO.listar();
 			
-			obserbableProdutos = FXCollections.observableArrayList(listProdutos);
-			tableViewInventario.setItems(obserbableProdutos);
+			observableListProdutos = FXCollections.observableArrayList(listProdutos);
+			tableViewInventario.setItems(observableListProdutos);
 					
 		}
 

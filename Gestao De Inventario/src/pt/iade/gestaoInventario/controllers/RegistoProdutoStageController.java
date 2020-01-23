@@ -17,76 +17,131 @@ import javafx.stage.Stage;
 import pt.iade.gestaoInventario.models.Categoria;
 import pt.iade.gestaoInventario.models.Produto;
 import pt.iade.gestaoInventario.models.dao.CategoriaDAO;
+// TODO: Auto-generated Javadoc
 /**
  * 
- * Controlador a interface para o registo dos produtos.
- * Permite adicionar os dados do produto.
- * Permite alterar os dados do produto escolhido na tabela.
+ * <p> Controlador a interface para o registo dos produtos.
+ * <p> Permite adicionar os dados do produto.
+ * <p> Permite alterar os dados do produto escolhido na tabela.
  *
+ * @author Renato Pitta Simões
  */
 public class RegistoProdutoStageController implements Initializable {
+	
+	/** O campo de texto produto nome. */
 	@FXML
 	private TextField textFieldProdutoNome;
 
+	/** O campo de texto produto preco. */
 	@FXML
 	private TextField textFieldProdutoPreco;
 
+	/** O campo de texto produto quantidade. */
 	@FXML
 	private TextField textFieldProdutoQuantidade;
 
+	/** A combobox produto categoria. */
 	@FXML
 	private ComboBox<Categoria> comboBoxProdutoCategoria;
 
+	/** A produto stage. */
 	private Stage produtoStage;
 
+	/** Botão confirmar click. */
 	private boolean buttonConfirmarClick = false;
 
+	/** atributo para manipulação produto. */
 	private Produto produto;
 
+	/** O botão Adicionar. */
 	@FXML
 	private Button Adicionar;
 
+	/** botão Cancelar. */
 	@FXML
 	private Button Cancelar;
 
+	/** Lista de categorias. */
 	List<Categoria> listCategorias;
-	ObservableList<Categoria> observableListCagegorias;
+	
+	/** Lista observável de categorias. */
+	ObservableList<Categoria> observableListCategorias;
 
+	/** Atributo para manipulação da base de dados. */
 	private final CategoriaDAO categoriaDAO = new CategoriaDAO();
 
+	/**
+	 * Initializa.
+	 *
+	 * @param location the location
+	 * @param resources the resources
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		carregarComboBoxCategorias();
 
 	}
 
+	/**
+	 * Obtém o produto stage.
+	 *
+	 * @return o produto stage
+	 */
 	public Stage getProdutoStage() {
 		return produtoStage;
 	}
 
+	/**
+	 * Define o produto stage.
+	 *
+	 * @param produtoStage o novo produto stage
+	 */
 	public void setProdutoStage(Stage produtoStage) {
 		this.produtoStage = produtoStage;
 	}
 
+	/**
+	 * Verifica se o botão está confirmando click.
+	 *
+	 * @return verdadeiro, se for o botão confirma click
+	 */
 	public boolean isButtonConfirmarClick() {
 		return buttonConfirmarClick;
 	}
 
+	/**
+	 * Define o botão confirmar click.
+	 *
+	 * @param buttonConfirmarClick o novo botão confirmar
+	 */
 	public void setButtonConfirmarClick(boolean buttonConfirmarClick) {
 		this.buttonConfirmarClick = buttonConfirmarClick;
 	}
 
+	/**
+	 * Obtém o produto.
+	 *
+	 * @return o produto
+	 */
 	public Produto getProduto() {
 		return produto;
 	}
 
+	/**
+	 * Carregar combobox categorias.
+	 */
 	private void carregarComboBoxCategorias() {
 
 		listCategorias = categoriaDAO.listar();
-		observableListCagegorias = FXCollections.observableArrayList(listCategorias);
-		comboBoxProdutoCategoria.setItems(observableListCagegorias);
+		observableListCategorias = FXCollections.observableArrayList(listCategorias);
+		comboBoxProdutoCategoria.setItems(observableListCategorias);
 	}
 
+	/**
+	 * Define o produto.
+	 *
+	 * @param produto o novo produto
+	 */
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 		this.textFieldProdutoNome.setText(produto.getNome());
@@ -95,11 +150,21 @@ public class RegistoProdutoStageController implements Initializable {
 		this.comboBoxProdutoCategoria.getSelectionModel().getSelectedItem();
 	}
 
+	/**
+	 * Botão cancelar.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void buttonCancelar(ActionEvent event) {
 		produtoStage.close();
 	}
 
+	/**
+	 * Botão confirmar.
+	 *
+	 * @param event the event
+	 */
 	@FXML
 	void buttonConfirmar(ActionEvent event) {
 
@@ -115,7 +180,11 @@ public class RegistoProdutoStageController implements Initializable {
 		}
 	}
 
-	/** Validar entrada de dados para o registo. */
+	/**
+	 *  Validar entrada de dados para o registo.
+	 *
+	 * @return verdadeiro, se for bem sucedido
+	 */
 	private boolean validarEntradaDeDados() {
 		String errorMessage = "";
 

@@ -31,30 +31,30 @@ CREATE TABLE colaboradores(
       PRIMARY KEY(idColaborador)
 );
 
-CREATE TABLE stocks(
-   idStock int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE pedidos(
+   idPedido int(11) NOT NULL AUTO_INCREMENT,
    data date NOT NULL,
    valor float NOT NULL,
    idColaborador int,
-   CONSTRAINT pk_stocks
-      PRIMARY KEY(idStock),
-   CONSTRAINT fk_stocks_colaboradores
+   CONSTRAINT pk_pedidos
+      PRIMARY KEY(idPedido),
+   CONSTRAINT fk_pedidos_colaboradores
       FOREIGN KEY(idColaborador)
       REFERENCES colaboradores(idColaborador)
 );
 
-CREATE TABLE itensdestock(
-   idItemDeStock int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE itensdopedido(
+   idItemDoPedido int(11) NOT NULL AUTO_INCREMENT,
    quantidade int NOT NULL,
    valor float NOT NULL,
    idProduto int,
    idStock int,
-   CONSTRAINT pk_itensdestock
-      PRIMARY KEY(idItemDeStock),
-   CONSTRAINT fk_itensdestock_produtos
+   CONSTRAINT pk_itensdepedido
+      PRIMARY KEY(idItemDoPedido),
+   CONSTRAINT fk_itensdopedido_produtos
       FOREIGN KEY(idProduto)
       REFERENCES produtos(idProduto),
-   CONSTRAINT fk_itensdestock_stocks
-      FOREIGN KEY(idStock)
-      REFERENCES stocks(idStock)
+   CONSTRAINT fk_itensdopedido_pedidos
+      FOREIGN KEY(idPedido)
+      REFERENCES pedidos(idPedido)
 );
